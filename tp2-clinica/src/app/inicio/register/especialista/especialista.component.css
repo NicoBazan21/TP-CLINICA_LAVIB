@@ -1,0 +1,15 @@
+/* zocial */
+.bg-indigo {
+  background: linear-gradient(to right,  rgba(177, 138, 87, 0.527), rgba(177, 138, 87, 0.925));
+  }
+
+  .card-registration-2 .bg-indigo {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+  }
+
+.transparente
+{
+  background: linear-gradient(to right,  rgba(23, 155, 173, 0.479), rgba(159, 199, 218, 0.425));
+}

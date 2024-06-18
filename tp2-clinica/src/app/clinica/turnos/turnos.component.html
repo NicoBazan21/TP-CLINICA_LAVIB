@@ -1,0 +1,22 @@
+<div class="container" style="width: 85%;">
+<mat-stepper [linear]="true" #stepper class="transparente">
+  <mat-step [completed]="this.pasoUno" [label]="this.especialidad == '' ? 'Elegir Especialidad' : 'Especialidad: ' + this.especialidad">
+    <app-especialidad (onEnviarCheck)="atraparCheck($event)"></app-especialidad>
+    
+    <button mat-button matStepperNext>Siguiente</button>
+    <button mat-button (click)="stepper.reset()" (click)="volver()">Restablecer</button>
+  </mat-step>
+  <mat-step [completed]="this.pasoDos" [label]="this.especialista == '' ? 'Elegir especialista' : 'Especialista: ' + this.especialista">
+    <app-especialista *ngIf="this.pasoUno" [pasoUno]="this.pasoUno" (onEnviarCheck)="atraparCheckDos($event)" [especialidad]="this.especialidad"></app-especialista>
+    
+    <button mat-button matStepperNext>Siguiente</button>
+    <button mat-button (click)="stepper.reset()" (click)="volver()">Restablecer</button>
+  </mat-step>
+  <mat-step label="Elegir turno">
+    <app-turno *ngIf="this.pasoDos" [especialidad]="this.especialidad" [especialista]="this.especialista"></app-turno>
+    <div>
+      <button mat-button (click)="stepper.reset()" (click)="volver()">Restablecer</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+</div>

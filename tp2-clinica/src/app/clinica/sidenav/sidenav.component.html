@@ -1,0 +1,45 @@
+<mat-toolbar class="blanco">
+  <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with logout icon" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-drawer-container [hasBackdrop]="false" class="nav altura">
+  <mat-drawer #drawer mode="push" class="nav">
+    <mat-list>
+      <mat-list-item>
+        <button mat-button routerLink="/clinica"><mat-icon fontIcon="home"></mat-icon>Inicio</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="profile"><mat-icon fontIcon="person" ></mat-icon>Mi perfil</button>
+      </mat-list-item>
+      <ng-container *ngIf="this.user?.rol == 'admin'">
+        <mat-list-item>
+          <button mat-button routerLink="administrarUsuarios"><mat-icon fontIcon="format_list_bulleted"></mat-icon>Usuarios</button>
+        </mat-list-item>
+      </ng-container>
+      <ng-container *ngIf="this.user?.rol != 'Especialista'">
+        <mat-list-item>
+          <button mat-button routerLink="turnos"><mat-icon fontIcon="medical_information"></mat-icon>Solicitar Turno</button>
+        </mat-list-item>
+      </ng-container>
+      <ng-container *ngIf="this.user?.rol != 'admin'">
+        <mat-list-item>
+          <button mat-button routerLink="misTurnos"><mat-icon>emergency</mat-icon>Mis Turnos</button>
+        </mat-list-item>
+      </ng-container>
+      <ng-container *ngIf="this.user?.rol == 'admin'">
+        <mat-list-item>
+          <button mat-button routerLink="misTurnos"><mat-icon>article</mat-icon>Turnos</button>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

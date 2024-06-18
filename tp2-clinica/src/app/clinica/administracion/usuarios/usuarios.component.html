@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row d-flex justify-content-around">
+    <div class="row col-8">
+    <h3 class="text-center col-8">Habilitacion de Especialistas</h3>
+      <button class="btn btn-info col-4" (click)="cambiar()">Cambiar vista</button>
+    </div>
+
+    <div class="row col-12">
+      <app-tabla [listaEspecialistas]="this.listaEspecialistas" (onEnviarEsp)="atraparEsp($event)"></app-tabla>
+    </div>
+    <ng-container *ngIf="this.bandera == false else elseBlock">
+    </ng-container>
+    <ng-template #elseBlock>
+        <app-registro class="col-10"></app-registro>
+    </ng-template>
+  </div>
+</div>

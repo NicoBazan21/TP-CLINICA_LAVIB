@@ -1,0 +1,30 @@
+<ng-container *ngIf="this.renderizar != false">
+    <div class="container col-10">
+        <div class="col-md d-flex justify-content-end">
+            <div class="col-md-8">
+                <h2>Mis turnos</h2>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Filtros:</span>
+                </div>
+                <ng-container *ngIf="this.rolActual == 'Paciente' || this.rolActual == 'admin'">
+                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad">
+                </ng-container>
+                <ng-container *ngIf="this.rolActual == 'Especialista'">
+                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialidad/Paciente">
+                </ng-container>
+            </div>
+        </div>
+        
+        <ng-container *ngIf="this.rolActual == 'Paciente'">
+            <app-paciente [misTurnos]="this.misTurnos"></app-paciente>
+        </ng-container>
+        <ng-container *ngIf="this.rolActual == 'Especialista'">
+            <app-especialista [misTurnos]="this.misTurnos"></app-especialista>
+        </ng-container>
+        <ng-container *ngIf="this.rolActual == 'admin'">
+            <app-admin [misTurnos]="this.misTurnos"></app-admin>
+        </ng-container>
+    </div>
+</ng-container>

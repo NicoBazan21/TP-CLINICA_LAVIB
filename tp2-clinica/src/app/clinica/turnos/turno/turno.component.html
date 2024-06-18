@@ -1,0 +1,13 @@
+<div class="container" style="position:relative; left:5px; height: 70%;">
+  <div class="row col-12 d-flex justify-content-around">
+    <div *ngFor="let item of listaTurnos" class="grosor">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <span>{{ item.fecha }}</span>
+        <span>{{ item.dia }}</span>
+      </div>
+      <div *ngFor="let i of item.hora" style="display: flex; flex-direction: column; align-items: center;">
+        <button class="btn btn-sm m-1 {{esTurnoOcupadoClass(item.fecha, i)}}" [disabled]="esTurnoOcupado(item.fecha, i)" (click)="guardarTurno(item.fecha, i)">{{i}}</button>
+      </div>
+    </div>
+  </div>
+</div>

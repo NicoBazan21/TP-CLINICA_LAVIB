@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Por que desea cancelar el turno?</h2>
+<mat-dialog-content>
+    <form class="example-form" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Comentario:</mat-label>
+                <input type="text" matInput formControlName="comentario">
+                <div *ngIf="comentario?.invalid && (comentario?.dirty || comentario?.touched)">
+                    <small class="text-danger">El comentario es requerido.</small>
+                </div>
+        </mat-form-field>
+      </form>      
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="cancelarTurno()">Confirmar</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

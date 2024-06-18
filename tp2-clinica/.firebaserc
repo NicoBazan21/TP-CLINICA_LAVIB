@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tp2-clinica-9e1f4": {
+      "hosting": {
+        "tp2-clinica": [
+          "tp2-clinica-9e1f4"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tp2-clinica-9e1f4"
+  }
+}

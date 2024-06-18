@@ -1,0 +1,73 @@
+<table class="table table-dark table-hover text-center" style="opacity: 0.8;">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Profesional</th>
+            <th>Paciente</th>
+            <th>Especialidad</th>
+            <th>Estado</th>
+            <th>Acciones disponibles</th>
+            <th>Detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of this.misTurnos" [attr.data-filtro]="item.nombreCompletoEspecialista +' '+ item.especialidad">
+            <td>{{item.fecha}}</td>
+            <td>{{item.hora}} hs.</td>
+            <td>{{item.nombreCompletoEspecialista}}</td>
+            <td>{{item.nombreCompletoPaciente}}</td>
+            <td>{{item.especialidad}}</td>
+
+            <ng-container [ngSwitch]="item.estadoTurno">
+                <ng-container *ngSwitchCase="'Pendiente'">
+                    <td>
+                        <button class="btn btn-outline-primary">Pendiente</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-danger" (click)="cancelarTurno(item.id)">Cancelar turno</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-secondary">Pendiente...</button>
+                    </td>
+                </ng-container>
+                
+                <ng-container *ngSwitchCase="'Aceptado'">
+                    <td>
+                        <button class="btn btn-outline-primary">Aceptado</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-danger" (click)="cancelarTurno(item.id)">Cancelar turno</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-secondary">Pendiente...</button>
+                    </td>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'Finalizado'">
+                    <td>
+                        <button class="btn btn-outline-success">Finalizado</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-warning" (click)="verResenia(item.id)">Ver reseña</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-info">Completar encuesta</button>
+                    </td>
+                </ng-container>
+
+                <ng-container *ngSwitchDefault>
+                    <td>
+                        <button class="btn btn-outline-secondary">Cancelado</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-secondary">Turno cancelado</button>                
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-secondary" (click)="verComentarioCancelado(item.id)">Comentario</button>
+                    </td>
+                </ng-container>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>

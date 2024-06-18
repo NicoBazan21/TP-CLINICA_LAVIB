@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+@import 'ngx-toastr/toastr';
+
+body
+{
+  background-image: url(https://img.freepik.com/foto-gratis/blur-hospital_1203-7972.jpg?w=740&t=st=1699976242~exp=1699976842~hmac=caf8e079451676b407bff5c7da545a8d976cd28b9b300e129eb7ae895b818773);
+  background-size: cover;
+}

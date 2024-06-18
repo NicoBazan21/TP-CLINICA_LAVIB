@@ -1,0 +1,59 @@
+<section class="gradient-custom-2 mt-2">
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-6">
+        <div class="card card-registration card-registration-2 transparente" style="border-radius: 15px;">
+                <div class="p-5">
+                  <h3 class="fw-normal mb-2 d-flex justify-content-center">Mi perfil</h3>
+
+                  <div class="d-flex justify-content-center align-items-center mb-2">
+                    <img  style="height:auto;" alt="" src={{this.img}} width="100" height="100"
+                     class="foto">
+                  </div>
+                      <div class="pb-2 d-flex justify-content-around">
+                        <div class="row col-5">
+                          <input id="a" disabled [value]="usuario?.nombre" class="form-control"/>
+                          <label class="form-label text-center" for="a">Nombre</label>
+                        </div>
+                        <div class="row col-5">
+                          <input disabled id="b" [value]="usuario?.apellido" class="form-control" />
+                          <label class="form-label text-center" for="b">Apellido</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-around">
+                        <div class="row col-7">
+                          <input disabled id="d" [value]="usuario?.mail" class="form-control" />
+                          <label class="form-label text-center" for="d">Mail</label>
+                        </div>
+                      </div>
+
+                      <div class="pb-2 d-flex justify-content-around">
+                        <div class="row col-3 pb-3">
+                          <input disabled id="c" [value]="usuario?.rol" class="form-control" />
+                          <label class="form-label text-center" for="c">Rol</label>
+                        </div>
+                        <div class="row col-3 pb-3">
+                          <input disabled id="d" [value]="usuario?.dni" class="form-control" />
+                          <label class="form-label text-center" for="d">Dni</label>
+                        </div>
+                        <div class="row col-3" *ngIf="this.usuario?.rol == 'Especialista'">
+                          <select class="form-select form-select-sm form-control" id="e">
+                            <ng-container *ngFor="let item of this.especialista?.especialidades">
+                              <option value={{item}}>{{item}}</option>
+                            </ng-container>
+                          </select>
+                          <label class="form-label text-center pb-2" for="e">Especialidades</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-around">
+                        <button *ngIf="this.usuario?.rol == 'Especialista'" class="btn btn-dark" routerLink="/clinica/modificar">Mis horarios / elegir especialidad</button>
+                        <button class="btn btn-dark" routerLink="/clinica">Volver</button>
+                      </div>
+                    </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Complete el formulario para finalizar: </h2>
+<mat-dialog-content>
+    <form class="example-form" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Resenia:</mat-label>
+            <textarea matInput formControlName="resenia"></textarea>
+            <div *ngIf="resenia?.invalid && (resenia?.dirty || resenia?.touched)">
+                <small class="text-danger">El campo resenia es requerido.</small>
+            </div>
+        </mat-form-field>
+      </form>      
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="finalizarTurno()">Confirmar</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

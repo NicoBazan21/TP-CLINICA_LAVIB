@@ -1,0 +1,14 @@
+<div class="container d-flex justify-content-center mt-5">
+  <div class="m-5">
+    <button (mouseenter)="onMouseEnter('Paciente')" (mouseleave)="onMouseLeave()" class="seleccion paciente" routerLink="/register/paciente"></button>
+  </div>
+
+  <h2 class="d-flex align-items-center">Elegir</h2>
+
+
+  <div class="m-5">
+    <button (mouseenter)="onMouseEnter('Especialista')" (mouseleave)="onMouseLeave()" class="seleccion especialista" routerLink="/register/especialista"></button>
+    <div aria-live="polite" class="d-flex justify-content-center"></div>
+  </div>
+</div>
+
