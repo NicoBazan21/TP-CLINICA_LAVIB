@@ -15,7 +15,10 @@
                   </div>
                   <div class="text-center pt-1">
                     <button class="btn btn-block gradient-custom-2 m-3" type="button" routerLink="profile">Mi perfil</button>
-                    <button class="btn btn-block gradient-custom-2 m-3" type="button" routerLink="register">Usuarios</button>
+                    <button class="btn btn-block gradient-custom-2 m-3" type="button" routerLink="misTurnos">Mis turnos</button>
+                    <ng-container *ngIf="this.rol != 'Especialista'">
+                        <button class="btn btn-block gradient-custom-2 m-3" routerLink="turnos">Solicitar Turno</button>
+                    </ng-container>
                   </div>
                 </form>
               </div>

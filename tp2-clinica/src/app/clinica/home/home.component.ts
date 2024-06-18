@@ -9,13 +9,13 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent {
 
   img: any;
-
+  rol: string = '';
   constructor(private userService: UserService){}
 
   ngOnInit()
   {
     this.userService.traerImagenes(this.userService.sesionFirestore.mail)
     .then(imagenes=> this.img = imagenes);
-  
+    this.rol = this.userService.sesionFirestore.rol;
   }
 }

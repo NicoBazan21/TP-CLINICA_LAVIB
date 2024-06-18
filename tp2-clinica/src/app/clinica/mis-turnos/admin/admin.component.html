@@ -28,6 +28,24 @@
                     </td>
                 </ng-container>
                 
+                <ng-container *ngSwitchCase="'Aceptado'">
+                    <td>
+                        <button class="btn btn-outline-warning">{{item.estadoTurno}}</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-warning">N/A</button>                
+                    </td>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'Finalizado'">
+                    <td>
+                        <button class="btn btn-outline-success">{{item.estadoTurno}}</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-success">N/A</button>                
+                    </td>
+                </ng-container>
+
                 <ng-container *ngSwitchDefault>
                     <td>
                         <button class="btn btn-outline-secondary">{{item.estadoTurno}}</button>
