@@ -1,0 +1,35 @@
+<ng-container *ngIf="renderizar">
+    <table class="table table-dark table-hover text-center" style="opacity: 0.8;">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Profesional</th>
+                <th>Paciente</th>
+                <th>Altura</th>
+                <th>Peso</th>
+                <th>Presion</th>
+                <th>Temperatura</th>
+                <th>Campo adicional 1</th>
+                <th>Campo adicional 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of this.turnosEncuesta">
+                <ng-container *ngIf="item.encuesta.id != ''">
+                    <tr [attr.data-filtro]="item.turno.nombreCompletoEspecialista +' '+ item.turno.especialidad + ' ' + 
+                    item.encuesta.altura + ' ' + item.encuesta.peso + ' ' + item.encuesta.presion + ' ' + item.encuesta.temperatura + ' ' + item.encuesta.claveUno + ' ' + item.encuesta.valorUno + ' ' + item.encuesta.claveDos + ' ' + item.encuesta.valorDos ">
+                        <td>{{item.turno.fecha}} {{item.turno.hora}} hs.</td>
+                        <td>{{item.turno.nombreCompletoEspecialista}}</td>
+                        <td>{{item.turno.nombreCompletoPaciente}}</td>
+                        <td>{{item.encuesta.altura}}cm.</td>
+                        <td>{{item.encuesta.peso}}kg.</td>
+                        <td>{{item.encuesta.presion}}.</td>
+                        <td>{{item.encuesta.temperatura}}º</td>
+                        <td>{{item.encuesta.valorUno}}</td>
+                        <td>{{item.encuesta.valorDos}}</td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-container>

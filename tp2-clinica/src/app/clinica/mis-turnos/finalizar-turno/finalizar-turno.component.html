@@ -1,14 +1,79 @@
-<h2 mat-dialog-title>Complete el formulario para finalizar: </h2>
+<h2 mat-dialog-title>Complete el formulario para finalizar:</h2>
 <mat-dialog-content>
     <form class="example-form" [formGroup]="form">
-        <mat-form-field class="example-full-width">
-            <mat-label>Resenia:</mat-label>
-            <textarea matInput formControlName="resenia"></textarea>
-            <div *ngIf="resenia?.invalid && (resenia?.dirty || resenia?.touched)">
-                <small class="text-danger">El campo resenia es requerido.</small>
+        <div class="d-flex flex-column align-items-center col-12">
+            <mat-form-field class="col-12">
+                <mat-label>Reseña:</mat-label>
+                <textarea matInput formControlName="resenia"></textarea>
+                <div *ngIf="resenia?.invalid && (resenia?.dirty || resenia?.touched)">
+                    <small class="text-danger">El campo reseña es requerido.</small>
+                </div>
+            </mat-form-field>
+            <h4>Historia clinica:</h4>
+            <div class="row d-flex justify-content-center col-12 mb-3">
+                <mat-form-field class="col-4">
+                    <mat-label>Altura:</mat-label>
+                    <input type="number" matInput formControlName="altura" placeholder="cm.">
+                    <div *ngIf="altura?.invalid && (altura?.dirty || altura?.touched)">
+                        <small class="text-danger">Mínimo 0, máximo 350</small>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="col-4">
+                    <mat-label>Peso:</mat-label>
+                    <input type="number" matInput formControlName="peso" placeholder="kg.">
+                    <div *ngIf="peso?.invalid && (peso?.dirty || peso?.touched)">
+                        <small class="text-danger">Mínimo 0, máximo 350</small>
+                    </div>
+                </mat-form-field>
             </div>
-        </mat-form-field>
-      </form>      
+            <div class="row d-flex justify-content-around col-12 mb-3">
+                <mat-form-field class="col-6">
+                    <mat-label>Temperatura:</mat-label>
+                    <input type="number" matInput formControlName="temperatura" placeholder="º">
+                    <div *ngIf="temperatura?.invalid && (temperatura?.dirty || temperatura?.touched)">
+                        <small class="text-danger">Mínimo 27, máximo 43</small>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="col-6">
+                    <mat-label>Presion:</mat-label>
+                    <input type="number" matInput formControlName="presion" placeholder="mm Hg.">
+                    <div *ngIf="presion?.invalid && (presion?.dirty || presion?.touched)">
+                        <small class="text-danger">Mínimo 80, máximo 130</small>
+                    </div>
+                </mat-form-field>
+            </div>
+            <div class="row d-flex justify-content-between col-12 mb-3">
+                <mat-form-field class="col-3">
+                    <mat-label>Campo 1 adicional:</mat-label>
+                    <input type="text" matInput formControlName="claveUno" placeholder="Ingrese datos:">
+                    <div *ngIf="claveUno?.invalid && (claveUno?.dirty || claveUno?.touched)">
+                        <small class="text-danger">Mínimo 3 caracteres.</small>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Valor 1 adicional:</mat-label>
+                    <input type="text" matInput formControlName="valorUno" placeholder="Ingrese datos:">
+                    <div *ngIf="valorUno?.invalid && (valorUno?.dirty || valorUno?.touched)">
+                        <small class="text-danger">Mínimo 3 caracteres.</small>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Campo 2 adicional:</mat-label>
+                    <input type="text" matInput formControlName="claveDos" placeholder="Ingrese datos:">
+                    <div *ngIf="claveDos?.invalid && (claveDos?.dirty || claveDos?.touched)">
+                        <small class="text-danger">Mínimo 3 caracteres.</small>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Valor 2 adicional:</mat-label>
+                    <input type="text" matInput formControlName="valorDos" placeholder="Ingrese datos:">
+                    <div *ngIf="valorDos?.invalid && (valorDos?.dirty || valorDos?.touched)">
+                        <small class="text-danger">Mínimo 3 caracteres.</small>
+                    </div>
+                </mat-form-field>
+            </div>
+        </div>      
+    </form>      
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button (click)="finalizarTurno()">Confirmar</button>

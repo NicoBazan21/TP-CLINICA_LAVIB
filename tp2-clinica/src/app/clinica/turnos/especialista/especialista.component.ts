@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { BuscadorObject } from '../especialidad/especialidad.component';
 
 @Component({
   selector: 'app-especialista',
@@ -11,7 +12,7 @@ export class EspecialistaComponent implements OnChanges, OnDestroy{
   @Input() especialidad!: string;
   @Input() pasoUno: boolean | undefined;
 
-  listaEspecialistas!: Promise<string[]>;
+  listaEspecialistas!: Promise<BuscadorObject[]>;
 
   constructor(private userService: UserService){}
 
@@ -22,7 +23,15 @@ export class EspecialistaComponent implements OnChanges, OnDestroy{
       console.log(this.especialidad);
       this.listaEspecialistas = new Promise(resolve =>
         this.userService.traerEspecialistasPorEspecialidad(this.especialidad)
-        .then(data => resolve(data.map(item => item['nombre']))))
+        .then((data) => {
+          let retorno: BuscadorObject[] = [];
+            data.map(async (item) => {
+            retorno.push(await this.userService.traerImagenes(item['mail']).then((a: string[]) => {
+              return { campo: `${item['nombre']}`, urlFoto: a[0] };
+            }));
+          })
+            resolve(retorno);
+        }))
     }
   }
 

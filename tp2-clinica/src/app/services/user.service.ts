@@ -170,7 +170,7 @@ export class UserService {
     uploadBytes(imgRef, file);
   }
 
-  traerImagenes(mail: string)
+  traerImagenes(mail: string) : Promise<string[]>
   {
     const imagesRef = ref(this.storage, mail);
     let imagenes: any[] = [];

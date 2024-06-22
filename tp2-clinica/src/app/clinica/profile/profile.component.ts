@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Admin } from 'src/app/models/admin';
 import { Especialista } from 'src/app/models/especialista';
 import { Paciente } from 'src/app/models/paciente';
@@ -12,12 +13,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent
 {
-  img: any;
+  img: string[] = [];
   usuario?: Especialista | Paciente | Admin;
   especialista?: Especialista;
   especialidades?: any;
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, private router: Router){}
 
   ngOnInit()
   {
@@ -36,6 +37,11 @@ export class ProfileComponent
        this.especialidades = a;
       });
       console.log(this.usuario);
+  }
+
+  irMisTurnos()
+  {
+    this.router.navigateByUrl("/clinica/misTurnos/turnos/true");
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, numberAttribute } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Especialista } from 'src/app/models/especialista';
@@ -23,12 +23,20 @@ export class TurnoComponent
 
   especialistaTarget!: Especialista;
 
+  restablecer()
+  {
+   this.dias = [];
+   this.turnos = [];
+   this.listaTurnos = [];
+  }
+
   constructor(private turnosService: TurnosService, private userService: UserService,
     private toastr: ToastrService, private router: Router
   ){}
 
-  ngOnInit()
+  ngOnChanges()
   {
+    this.restablecer();
     this.userService.traerEspecialistaPorNombreEspecialidad(this.especialista!,this.especialidad!).then((a)=>
       {
         this.especialistaTarget = a[0] as Especialista;
@@ -38,7 +46,6 @@ export class TurnoComponent
         this.turnosService.traerTurnosPorEspecialista(this.especialistaTarget.id).subscribe((data)=>
         {
           this.turnos = data;
-          console.log(this.turnos);
         });
       });
   }
@@ -72,7 +79,8 @@ export class TurnoComponent
 
   esTurnoOcupado(fecha: string, hora: string): boolean
   {
-    return this.turnos?.some(turno => turno.fecha == fecha && turno.hora === hora);
+    return this.turnos?.some(turno => turno.fecha == fecha && turno.hora === hora && 
+      (turno.estadoTurno == 'Pendiente' || turno.estadoTurno == 'Aceptado'));
   }
 
   esTurnoOcupadoClass(fecha: string, hora: string) : string
@@ -125,17 +133,47 @@ export class TurnoComponent
       cancelButtonColor: "#d33",
       confirmButtonText: "Aceptar.",
       cancelButtonText:"Cancelar.",
-    }).then(() => {
-      this.turnosService.guardarTurno(turno).then(()=> {
-        this.toastr.success('Su turno ha sido reservado...', `Exito!`,
-        {
-          tapToDismiss: true,
-          progressBar: true,
-          progressAnimation:'increasing',
-          payload:true,
-          positionClass: 'toast-top-right'
+    }).then((a) => {
+      if(a.isConfirmed)
+        this.turnosService.guardarTurno(turno).then(()=> {
+          this.toastr.success('Su turno ha sido reservado...', `Exito!`,
+          {
+            tapToDismiss: true,
+            progressBar: true,
+            progressAnimation:'increasing',
+            payload:true,
+            positionClass: 'toast-top-right'
+          });
         });
-      });
     });
+  }
+
+  mostrar($event: Event) {
+    const targetDiv = $event.currentTarget as HTMLElement;
+    $(targetDiv).find('button').each((i,boton)=>
+    {
+        $(boton).toggleClass('btn-outline-dark');
+        $(boton).toggleClass('btn-dark');
+    })
+    const parent = targetDiv.parentNode as HTMLElement;
+  
+    Array.from(parent.children).forEach((child: Element) => {
+      if (child !== targetDiv) {
+        const botones = child.querySelectorAll('button');
+        botones.forEach((button: Element) => {
+          $(button as HTMLElement).toggle();
+        });
+      }
+    });
+  }
+
+  formatHora(hora: string)
+  {
+    let test = hora.split(':');
+    if(parseInt(test[0]) < 12)
+      hora = hora + ' am';
+    else
+      hora = hora + ' pm';
+    return hora;
   }
 }

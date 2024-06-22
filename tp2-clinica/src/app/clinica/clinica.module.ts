@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MisHorariosComponent } from './mis-horarios/mis-horarios.component';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
     ClinicaRoutingModule,
     MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule,
     MatToolbarModule, MatIconModule, MatListModule,
-    ReactiveFormsModule,FormsModule
+    ReactiveFormsModule,FormsModule, CarouselModule
   ]
 })
 export class ClinicaModule { }

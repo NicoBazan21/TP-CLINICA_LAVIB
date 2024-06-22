@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Turno } from 'src/app/models/turnos';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UserService } from 'src/app/services/user.service';
 import * as $ from 'jquery';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -11,7 +12,9 @@ import * as $ from 'jquery';
 })
 export class MisTurnosComponent {
 
-  constructor(private userService: UserService, private turnosService: TurnosService){}
+  historiaClinica: string = '';
+  
+  constructor(private route: ActivatedRoute,private userService: UserService, private turnosService: TurnosService){}
   
   misTurnos: Turno[] = [];
   rolActual: string = '';
@@ -19,6 +22,11 @@ export class MisTurnosComponent {
   filtro: string = '';
 
   ngOnInit() {
+    this.route.params.subscribe(params =>
+    {
+      this.historiaClinica = params['historiaClinica'];
+      console.log(this.historiaClinica);
+    })
     if(this.userService.sesionFirestore.rol == 'Paciente')
       this.turnosService.traerTurnosPorPaciente(this.userService.sesionFirestore.id).subscribe((a)=>
       {

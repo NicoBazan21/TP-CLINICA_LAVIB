@@ -20,6 +20,8 @@
 
   .gris
   {
+    background-color: #28a745;
     opacity: var(--bs-btn-disabled-opacity);
+    color: white;
   }
   

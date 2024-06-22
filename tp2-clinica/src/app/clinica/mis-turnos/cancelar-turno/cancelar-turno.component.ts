@@ -36,8 +36,8 @@ export class CancelarTurnoComponent implements OnInit{
         
       this.turnosService.cancelarTurno(this.data.misTurnos.find(a=>a.id == this.data.id)!, comentario)
         .then(()=> {
+          this.dialogRef.close('');
           this.toastr.success('Su turno ha sido cancelado...', `Listo!`, { tapToDismiss: true, progressBar: true, progressAnimation:'increasing', payload:true, positionClass: 'toast-top-right' });
-            this.dialogRef.close('');
           }
         );
     }

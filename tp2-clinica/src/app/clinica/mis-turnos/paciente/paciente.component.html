@@ -1,73 +1,113 @@
-<table class="table table-dark table-hover text-center" style="opacity: 0.8;">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Profesional</th>
-            <th>Paciente</th>
-            <th>Especialidad</th>
-            <th>Estado</th>
-            <th>Acciones disponibles</th>
-            <th>Detalles</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of this.misTurnos" [attr.data-filtro]="item.nombreCompletoEspecialista +' '+ item.especialidad">
-            <td>{{item.fecha}}</td>
-            <td>{{item.hora}} hs.</td>
-            <td>{{item.nombreCompletoEspecialista}}</td>
-            <td>{{item.nombreCompletoPaciente}}</td>
-            <td>{{item.especialidad}}</td>
+<ng-container *ngIf="renderizar">
+    <table class="table table-dark table-hover text-center" style="opacity: 0.8;">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Profesional</th>
+                <th>Paciente</th>
+                <th>Especialidad</th>
+                <th>Estado</th>
+                <th>Acciones disponibles</th>
+                <th>Detalles</th>
+                <th>Historia clinica</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of this.turnosEncuesta">
+                <tr [attr.data-filtro]="item.turno.nombreCompletoEspecialista +' '+ item.turno.especialidad + ' ' + 
+                item.encuesta.altura + ' ' + item.encuesta.peso + ' ' + item.encuesta.presion + ' ' + item.encuesta.temperatura + ' ' + item.encuesta.claveUno + ' ' + item.encuesta.valorUno + ' ' + item.encuesta.claveDos + ' ' + item.encuesta.valorDos ">
+                <!-- <tr [attr.data-filtro]="item.turno.nombreCompletoEspecialista +' '+ item.turno.especialidad"> -->
+                    <td>{{item.turno.fecha}}</td>
+                    <td>{{item.turno.hora}} hs.</td>
+                    <td>{{item.turno.nombreCompletoEspecialista}}</td>
+                    <td>{{item.turno.nombreCompletoPaciente}}</td>
+                    <td>{{item.turno.especialidad}}</td>
 
-            <ng-container [ngSwitch]="item.estadoTurno">
-                <ng-container *ngSwitchCase="'Pendiente'">
-                    <td>
-                        <button class="btn btn-outline-primary">Pendiente</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-danger" (click)="cancelarTurno(item.id)">Cancelar turno</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-secondary">Pendiente...</button>
-                    </td>
-                </ng-container>
-                
-                <ng-container *ngSwitchCase="'Aceptado'">
-                    <td>
-                        <button class="btn btn-outline-primary">Aceptado</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-danger" (click)="cancelarTurno(item.id)">Cancelar turno</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-secondary">Pendiente...</button>
-                    </td>
-                </ng-container>
+                    <ng-container [ngSwitch]="item.turno.estadoTurno">
+                        <ng-container *ngSwitchCase="'Pendiente'">
+                            <td>
+                                <span style="color:#007bff;">Pendiente</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="cancelarTurno(item.turno.id)">Cancelar turno</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary">Pendiente...</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary">N\A</button>
+                            </td>
+                        </ng-container>
+                        
+                        <ng-container *ngSwitchCase="'Aceptado'">
+                            <td>
+                                <span style="color:#ffc107;">Aceptado</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="cancelarTurno(item.turno.id)">Cancelar turno</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary">Pendiente...</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary">N\A</button>
+                            </td>
+                        </ng-container>
 
-                <ng-container *ngSwitchCase="'Finalizado'">
-                    <td>
-                        <button class="btn btn-outline-success">Finalizado</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-warning" (click)="verResenia(item.id)">Ver reseña</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-info">Completar encuesta</button>
-                    </td>
-                </ng-container>
+                        <ng-container *ngSwitchCase="'Finalizado'">
+                            <td>
+                                <span style="color:#198754;">Finalizado</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-warning" (click)="verResenia(item.turno.id)">Ver reseña</button>
+                            </td>
+                            <td class="d-flex">
+                                <button class="btn btn-outline-info me-2">Encuesta</button>
+                                
+                                <ng-container *ngIf="item.turno.comentarioAtencion == '' else elseBlock">
+                                  <button class="btn btn-outline-info me-2" (click)="calificarAtencion(item.turno.id)">Calificar aten.</button>
+                                </ng-container>
+                              
+                                <ng-template #elseBlock>
+                                  <button class="btn btn-outline-info me-2" (click)="verComentarioAtencion(item.turno.id)">Ver coment.</button>
+                                </ng-template>
+                              </td>                              
+                            <td>
+                                <button class="btn btn-outline-secondary" (click)="mostrar(item.turno.id)">Detalles</button>
+                            </td>
+                        </ng-container>
 
-                <ng-container *ngSwitchDefault>
-                    <td>
-                        <button class="btn btn-outline-secondary">Cancelado</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-secondary">Turno cancelado</button>                
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-secondary" (click)="verComentarioCancelado(item.id)">Comentario</button>
-                    </td>
-                </ng-container>
+                        <ng-container *ngSwitchDefault>
+                            <td>
+                                <span style="color:#6c757d;">Cancelado</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary">Turno cancelado</button>                
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary" (click)="verComentarioCancelado(item.turno.id)">Ver Comentario</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary">N\A</button>
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                </tr>
+                <tr [id]="item.turno.id" style="display:none;">
+                    <ng-container *ngIf="item.encuesta.id != ''">
+                        <td>Altura: {{item.encuesta.altura}}cm.</td>
+                        <td>Peso: {{item.encuesta.peso}}kg.</td>
+                        <td>Presion: {{item.encuesta.presion}}.</td>
+                        <td>Temperatura: {{item.encuesta.temperatura}}º</td>
+                        <td>{{item.encuesta.claveUno}}:</td>
+                        <td>{{item.encuesta.valorUno}}</td>
+                        <td>{{item.encuesta.claveDos}}:</td>
+                        <td>{{item.encuesta.valorDos}}</td>
+                        <td></td>
+                    </ng-container>
+                </tr>
             </ng-container>
-        </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</ng-container>

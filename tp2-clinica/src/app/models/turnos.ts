@@ -12,6 +12,7 @@ export class Turno
   encuesta: string;
   resenia: string;
   especialidad: string;
+  comentarioAtencion: string;
 
   constructor(
   id: string,
@@ -25,7 +26,8 @@ export class Turno
   estadoTurno: string,
   encuesta: string,
   resenia: string,
-  especialidad: string)
+  especialidad: string,
+  comentarioAtencion: string = '')
   {
     this.id = id;
     this.fecha = fecha;
@@ -39,5 +41,6 @@ export class Turno
     this.encuesta = encuesta;
     this.resenia = resenia;
     this.especialidad = especialidad;
+    this.comentarioAtencion = comentarioAtencion;
   }
 }

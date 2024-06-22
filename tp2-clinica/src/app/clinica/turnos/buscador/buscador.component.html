@@ -1,4 +1,20 @@
-<form class="example-form">
+<div class="container d-flex justify-content-between">
+  <ng-container *ngFor="let option of this.opciones">
+
+    <div class="image-label-container">
+      <img 
+        (click)="validar(option.campo)"  
+        [src]="option.urlFoto" 
+        (error)="asignarDefault($event)" 
+        class="specialist-image"
+      >
+      <label *ngIf="mostrarNombre" class="specialist-label">{{ option.campo }}</label>
+    </div>
+    <!-- <button class="btn btn-info col-2" (click)="validar($event)">{{option}}</button> -->
+  </ng-container>
+</div>
+
+<!-- <form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>Elegir</mat-label>
     <input type="text"
@@ -6,10 +22,10 @@
            matInput
            [formControl]="myControl"
            [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
+    <mat-autocomplete #auto="matAutocomplete">      
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="validar($event)">
         {{option}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-</form>
+</form> -->

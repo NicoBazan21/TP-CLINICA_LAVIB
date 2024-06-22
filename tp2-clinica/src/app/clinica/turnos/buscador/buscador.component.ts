@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl} from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
+import { BuscadorObject } from '../especialidad/especialidad.component';
 
 @Component({
   selector: 'app-buscador',
@@ -10,34 +11,43 @@ import { Observable, map, startWith } from 'rxjs';
 
 export class BuscadorComponent {
 
-  @Input() listaGenerica!: Promise<string[]>;
+  @Input() listaGenerica!: Promise<BuscadorObject[]>;
   @Output() onEnviarCheck = new EventEmitter<any>();
+  @Input() mostrarNombre?: boolean;
 
   myControl = new FormControl('');
-  opciones!: string[];
+  opciones!: BuscadorObject[];
   filteredOptions!: Observable<string[]>;
   valor!: string;
-
+  comenzar: boolean = false;
   ngOnInit()
   {
     this.listaGenerica.then((data)=>
     {
       this.opciones = data;
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value || '')),
-      );      
+      this.comenzar = true;
     });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.opciones.filter(option => option.toLowerCase().includes(filterValue));
+  ngOnChanges()
+  {
+    this.comenzar = false;
+    this.listaGenerica.then((data)=>
+      {
+        this.opciones = data;
+        this.comenzar = true;
+      });
   }
 
-  validar($event: any)
+  validar(campo: string)
   {
-    this.onEnviarCheck.emit({valor: true, descripcion: $event.target.innerText});
+    console.log(campo);
+    this.onEnviarCheck.emit({valor: true, descripcion: campo});
+  }
+
+  asignarDefault(event: Event)
+  {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = `../../../../assets/especialidades/Default.png`;
   }
 }

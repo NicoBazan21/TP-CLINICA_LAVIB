@@ -2,29 +2,37 @@
     <div class="container col-10">
         <div class="col-md d-flex justify-content-end">
             <div class="col-md-8">
-                <h2>Mis turnos</h2>
+                <ng-container *ngIf="this.historiaClinica else elseBlock">
+                    <h2>Historia clinica</h2>
+                </ng-container>
+                <ng-template #elseBlock>
+                    <h2>Mis turnos</h2>
+                </ng-template>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Filtros:</span>
                 </div>
                 <ng-container *ngIf="this.rolActual == 'Paciente' || this.rolActual == 'admin'">
-                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad">
+                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad/Historia Clinica">
                 </ng-container>
                 <ng-container *ngIf="this.rolActual == 'Especialista'">
-                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialidad/Paciente">
+                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialidad/Paciente/Historia Clinica">
                 </ng-container>
             </div>
         </div>
         
-        <ng-container *ngIf="this.rolActual == 'Paciente'">
+        <ng-container *ngIf="this.rolActual == 'Paciente' && !this.historiaClinica">
             <app-paciente [misTurnos]="this.misTurnos"></app-paciente>
         </ng-container>
-        <ng-container *ngIf="this.rolActual == 'Especialista'">
+        <ng-container *ngIf="this.rolActual == 'Especialista' && !this.historiaClinica">
             <app-especialista [misTurnos]="this.misTurnos"></app-especialista>
         </ng-container>
-        <ng-container *ngIf="this.rolActual == 'admin'">
+        <ng-container *ngIf="this.rolActual == 'admin' && !this.historiaClinica">
             <app-admin [misTurnos]="this.misTurnos"></app-admin>
+        </ng-container>
+        <ng-container *ngIf="this.historiaClinica">
+            <app-historia-clinica [misTurnos]="this.misTurnos"></app-historia-clinica>
         </ng-container>
     </div>
 </ng-container>

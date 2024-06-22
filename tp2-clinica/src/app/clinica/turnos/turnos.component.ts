@@ -13,6 +13,8 @@ export class TurnosComponent
   especialidad: string = '';
   especialista: string = '';
   
+  
+
   atraparCheck($event:any)
   {
     this.pasoUno = $event.valor;

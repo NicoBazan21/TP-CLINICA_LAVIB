@@ -28,8 +28,16 @@ export class TurnosService {
       estadoTurno: turno.estadoTurno,
       encuesta: turno.encuesta,
       resenia: turno.resenia,
-      especialidad: turno.especialidad
+      especialidad: turno.especialidad,
+      comentarioAtencion: turno.comentarioAtencion
     });
+  }
+
+  calificarAtencion(turno: Turno, comentario: string)
+  {
+    turno.comentarioAtencion = comentario;
+
+    return this.modificarTurno(turno);
   }
 
   finalizarTurno(turno: Turno, resenia: string) : Promise<void>

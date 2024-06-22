@@ -15,6 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { VerComentarioComponent } from './ver-comentario/ver-comentario.component';
 import { FinalizarTurnoComponent } from './finalizar-turno/finalizar-turno.component';
 import { AdminComponent } from './admin/admin.component';
+import { CalificarAtencionComponent } from './calificar-atencion/calificar-atencion.component';
+import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { AdminComponent } from './admin/admin.component';
     CancelarTurnoComponent,
     VerComentarioComponent,
     FinalizarTurnoComponent,
-    AdminComponent
+    AdminComponent,
+    CalificarAtencionComponent,
+    HistoriaClinicaComponent
   ],
   imports: [
     MisTurnosRoutingModule,

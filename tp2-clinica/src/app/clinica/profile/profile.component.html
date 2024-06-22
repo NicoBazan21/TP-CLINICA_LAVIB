@@ -7,8 +7,17 @@
                   <h3 class="fw-normal mb-2 d-flex justify-content-center">Mi perfil</h3>
 
                   <div class="d-flex justify-content-center align-items-center mb-2">
-                    <img  style="height:auto;" alt="" src={{this.img}} width="100" height="100"
-                     class="foto">
+                    <!-- <img  style="height:auto;" alt="" src={{this.img}} width="100" height="100"
+                     class="foto"> -->
+                     <img *ngIf="this.img.length == 1" style="height:auto;" [src]="this.img" alt="" width="100" height="100" class="foto">
+                     
+                     <ng-container *ngIf="this.img.length > 1">
+                      <carousel>
+                        <slide *ngFor="let image of this.img">
+                          <img style="height:100px; width: 100px;" [src]="image" alt="" width="100" height="100" class="foto">
+                        </slide>
+                      </carousel>
+                    </ng-container>
                   </div>
                       <div class="pb-2 d-flex justify-content-around">
                         <div class="row col-5">
@@ -49,6 +58,7 @@
 
                       <div class="d-flex justify-content-around">
                         <button *ngIf="this.usuario?.rol == 'Especialista'" class="btn btn-dark" routerLink="/clinica/modificar">Mis horarios / elegir especialidad</button>
+                        <button class="btn btn-dark" *ngIf="this.usuario?.rol == 'Paciente'" (click)="irMisTurnos()">Mi historia clinica</button>
                         <button class="btn btn-dark" routerLink="/clinica">Volver</button>
                       </div>
                     </div>

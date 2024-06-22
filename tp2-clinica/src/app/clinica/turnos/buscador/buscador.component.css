@@ -1,0 +1,21 @@
+.image-label-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    text-align: center;  /* Centra el texto del label */
+    margin: 10px;        /* Ajusta según el espacio que desees alrededor */
+  }
+  
+  .specialist-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+    border: 2px solid black;
+    margin-bottom: 5px;  /* Añade un margen para separar la imagen del label */
+  }
+  
+  .specialist-label {
+    font-size: 14px;     /* Ajusta el tamaño de la fuente del label */
+    color: #000;         /* Ajusta el color del texto según tus necesidades */
+  }
+  

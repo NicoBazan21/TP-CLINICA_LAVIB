@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Especialista } from 'src/app/models/especialista';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,7 +13,7 @@ export class UsuariosComponent
   bandera = false;
   listaEspecialistas: any[] = [];
 
-  constructor(private userServie: UserService){}
+  constructor(private userServie: UserService, private router: Router){}
 
   ngOnInit()
   {
@@ -30,5 +31,10 @@ export class UsuariosComponent
   cambiar()
   {
     this.bandera = !this.bandera;
+  }
+
+  verHistoriaClinica()
+  {
+    this.router.navigateByUrl("/clinica/misTurnos/turnos/admin");
   }
 }
