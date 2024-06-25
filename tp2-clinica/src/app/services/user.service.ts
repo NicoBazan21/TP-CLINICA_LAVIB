@@ -137,6 +137,11 @@ export class UserService {
     return collectionData(chats) as Observable<any[]>;
   }
 
+  traerUsuario()
+  {
+    return collectionData(this.coleccionUsuarios) as Observable<any[]>;
+  }
+
   modificar(user: Paciente | Especialista) : Promise<void>
   {
     const documento = doc(this.coleccionUsuarios, user.id);

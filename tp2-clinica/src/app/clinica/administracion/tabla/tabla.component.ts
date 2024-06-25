@@ -9,9 +9,9 @@ import { Especialista } from 'src/app/models/especialista';
 export class TablaComponent {
   @Input() listaEspecialistas!: any;
 
-  @Output() onEnviarEsp: EventEmitter<Especialista> = new EventEmitter;
+  @Output() onEnviarEsp: EventEmitter<any> = new EventEmitter;
 
-  habilitar(esp: Especialista)
+  habilitar(esp: any)
   {
     esp.habilitado = !(esp.habilitado);
     this.onEnviarEsp.emit(esp);

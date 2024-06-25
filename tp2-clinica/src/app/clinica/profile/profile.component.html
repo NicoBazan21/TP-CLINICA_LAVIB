@@ -1,4 +1,4 @@
-<section class="gradient-custom-2 mt-2">
+<section class="gradient-custom-2 mt-2" id="descargar">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-6">
@@ -59,6 +59,7 @@
                       <div class="d-flex justify-content-around">
                         <button *ngIf="this.usuario?.rol == 'Especialista'" class="btn btn-dark" routerLink="/clinica/modificar">Mis horarios / elegir especialidad</button>
                         <button class="btn btn-dark" *ngIf="this.usuario?.rol == 'Paciente'" (click)="irMisTurnos()">Mi historia clinica</button>
+                        <!-- <button class="btn btn-danger" *ngIf="this.usuario?.rol == 'Paciente'" (click)="exportarPdf()">Exportar a pdf</button> -->
                         <button class="btn btn-dark" routerLink="/clinica">Volver</button>
                       </div>
                     </div>

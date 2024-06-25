@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { Admin } from 'src/app/models/admin';
 import { Especialista } from 'src/app/models/especialista';
 import { Paciente } from 'src/app/models/paciente';
@@ -44,4 +46,23 @@ export class ProfileComponent
     this.router.navigateByUrl("/clinica/misTurnos/turnos/true");
   }
 
+
+  exportarPdf()
+  {
+    var data = document.getElementById('descargar')!;
+    html2canvas(data).then(canvas => {
+      var width = 309;
+      var height = 295;
+      var imgHeight = canvas.height * height / canvas.width;
+      var heightLeft = height;
+
+      const contentDataUrl = canvas.toDataURL('image/png');
+
+      let pdf = new jsPDF('p','mm','a4');
+      var position = 0;
+
+      pdf.addImage(contentDataUrl, 'PNG',0,position, width, height);
+      pdf.save('pdfPrueba.pdf');
+    });
+  }
 }

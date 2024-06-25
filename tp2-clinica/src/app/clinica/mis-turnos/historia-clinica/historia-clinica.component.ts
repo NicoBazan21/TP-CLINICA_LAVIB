@@ -37,4 +37,5 @@ export class HistoriaClinicaComponent {
     this.turnosEncuesta = aux;
     this.renderizar = true;
   }
+
 }

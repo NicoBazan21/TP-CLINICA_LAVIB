@@ -1,5 +1,5 @@
 <ng-container *ngIf="this.renderizar != false">
-    <div class="container col-10">
+    <div class="container col-10" id="descargar">
         <div class="col-md d-flex justify-content-end">
             <div class="col-md-8">
                 <ng-container *ngIf="this.historiaClinica else elseBlock">
@@ -13,6 +13,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Filtros:</span>
                 </div>
+                <button class="btn btn-danger" *ngIf="this.rolActual == 'Paciente'" (click)="exportarPdf()">Exportar a pdf</button>
                 <ng-container *ngIf="this.rolActual == 'Paciente' || this.rolActual == 'admin'">
                     <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad/Historia Clinica">
                 </ng-container>

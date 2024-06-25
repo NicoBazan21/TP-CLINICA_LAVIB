@@ -1,6 +1,6 @@
 <ng-container *ngIf="this.listaEspecialistas">
   <div class="row col-12">
-    <table class="table table-hover" style="opacity: 0.7;">
+    <table class="table table-dark table-hover" style="opacity: 0.7;">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -9,7 +9,6 @@
           <th>Edad</th>
           <th>Mail</th>
           <th>Rol</th>
-          <th>Especialidad</th>
           <th>Habilitado</th>
         </tr>
       </thead>
@@ -21,13 +20,19 @@
           <td>{{prod.edad}}</td>
           <td>{{prod.mail}}</td>
           <td>{{prod.rol}}</td>
-          <td>{{prod.especialidad}}</td>
-          <td *ngIf="prod.habilitado == false else elseBlock">
-            <button class="btn btn-success" (click)="habilitar(prod)">Habilitar</button>
-          </td>
-          <ng-template #elseBlock>
+          <ng-container *ngIf="prod.rol == 'Especialista' else elseBlockk">
+            <td *ngIf="prod.habilitado == false else elseBlock">
+              <button class="btn btn-success" (click)="habilitar(prod)">Habilitar</button>
+            </td>
+            <ng-template #elseBlock>
+              <td>
+                <button class="btn btn-danger" (click)="habilitar(prod)">Deshabilitar</button>
+              </td>
+            </ng-template>
+          </ng-container>
+          <ng-template #elseBlockk>
             <td>
-              <button class="btn btn-danger" (click)="habilitar(prod)">Deshabilitar</button>
+              <button class="btn btn-secondary" (click)="habilitar(prod)">N\A</button>
             </td>
           </ng-template>
         </tr>
