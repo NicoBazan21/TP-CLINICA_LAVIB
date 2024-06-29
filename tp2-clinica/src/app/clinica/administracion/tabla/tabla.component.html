@@ -13,13 +13,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let prod of this.listaEspecialistas">
+        <tr *ngFor="let prod of this.listaEspecialistas | ordenarAlfabetico:'nombre'">
           <td>{{prod.nombre}}</td>
-          <td>{{prod.apellido}}</td>
+          <td>{{prod.apellido | datoImpotante}}</td>
           <td>{{prod.dni}}</td>
-          <td>{{prod.edad}}</td>
+          <td>{{prod.edad | formatEdad}}</td>
           <td>{{prod.mail}}</td>
-          <td>{{prod.rol}}</td>
+          <td>{{prod.rol | datoImpotante}}</td>
           <ng-container *ngIf="prod.rol == 'Especialista' else elseBlockk">
             <td *ngIf="prod.habilitado == false else elseBlock">
               <button class="btn btn-success" (click)="habilitar(prod)">Habilitar</button>

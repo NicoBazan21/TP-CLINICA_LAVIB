@@ -1,3 +1,4 @@
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -12,7 +13,19 @@ import { __values } from 'tslib';
 @Component({
   selector: 'app-finalizar-turno',
   templateUrl: './finalizar-turno.component.html',
-  styleUrls: ['./finalizar-turno.component.css']
+  styleUrls: ['./finalizar-turno.component.css'],
+  animations: [
+    trigger('slideDownUp', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)', opacity: 0 }),
+        animate('1500ms ease-out', keyframes([
+          style({ transform: 'translateY(0)', opacity: 1, offset: 0.8 }),
+          style({ transform: 'translateY(-40px)', offset: 0.9 }),
+          style({ transform: 'translateY(0)', offset: 1 })
+        ]))
+      ])
+    ])
+  ]
 })
 export class FinalizarTurnoComponent {
   form!: FormGroup;

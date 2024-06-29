@@ -1,4 +1,4 @@
-<section class="gradient-custom-2 mt-2">
+<section class="gradient-custom-2 mt-2" [@slideFromTop]>
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col-6">
@@ -33,11 +33,11 @@
 
                 <h5 class="fw-normal mb-2 d-flex justify-content-center">Dias laborables</h5>
                 <div class="pb-2 d-flex justify-content-center align-items-around" id="botonesLaborables">
-                    <button class="btn m-2 btn-light" (click)="habilitarDia($event)">Lunes</button>
-                    <button class="btn m-2 btn-light" (click)="habilitarDia($event)">Martes</button>
-                    <button class="btn m-2 btn-light" (click)="habilitarDia($event)">Miercoles</button>
-                    <button class="btn m-2 btn-light" (click)="habilitarDia($event)">Jueves</button>
-                    <button class="btn m-2 btn-light" (click)="habilitarDia($event)">Viernes</button>
+                    <button appSeleccionar class="btn m-2 btn-light" (click)="habilitarDia($event)">Lunes</button>
+                    <button appSeleccionar class="btn m-2 btn-light" (click)="habilitarDia($event)">Martes</button>
+                    <button appSeleccionar class="btn m-2 btn-light" (click)="habilitarDia($event)">Miercoles</button>
+                    <button appSeleccionar class="btn m-2 btn-light" (click)="habilitarDia($event)">Jueves</button>
+                    <button appSeleccionar class="btn m-2 btn-light" (click)="habilitarDia($event)">Viernes</button>
                 </div>
 
                 <h5 class="fw-normal mb-2 d-flex justify-content-center">Horarios</h5>

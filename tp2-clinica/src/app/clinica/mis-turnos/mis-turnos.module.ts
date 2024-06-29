@@ -17,6 +17,7 @@ import { FinalizarTurnoComponent } from './finalizar-turno/finalizar-turno.compo
 import { AdminComponent } from './admin/admin.component';
 import { CalificarAtencionComponent } from './calificar-atencion/calificar-atencion.component';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
+import { LimpiarFiltroDirective } from 'src/app/directivas/limpiar-filtro.directive';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
     FinalizarTurnoComponent,
     AdminComponent,
     CalificarAtencionComponent,
-    HistoriaClinicaComponent
+    HistoriaClinicaComponent,
+    LimpiarFiltroDirective,
   ],
   imports: [
     MisTurnosRoutingModule,

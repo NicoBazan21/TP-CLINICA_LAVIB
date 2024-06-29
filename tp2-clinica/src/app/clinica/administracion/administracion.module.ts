@@ -8,6 +8,9 @@ import { TablaComponent } from './tabla/tabla.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { OrdenarAlfabeticoPipe } from 'src/app/pipes/ordenar-alfabetico.pipe';
+import { FormatEdadPipe } from 'src/app/pipes/format-edad.pipe';
+import { DatoImpotantePipe } from 'src/app/pipes/dato-impotante.pipe';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     AdministracionComponent,
     UsuariosComponent,
     TablaComponent,
-    RegistroComponent
+    RegistroComponent,
+    OrdenarAlfabeticoPipe,
+    FormatEdadPipe,
+    DatoImpotantePipe
   ],
   imports: [
     CommonModule,

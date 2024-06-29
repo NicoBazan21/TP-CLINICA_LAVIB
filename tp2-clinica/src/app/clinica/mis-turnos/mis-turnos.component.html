@@ -15,10 +15,10 @@
                 </div>
                 <button class="btn btn-danger" *ngIf="this.rolActual == 'Paciente'" (click)="exportarPdf()">Exportar a pdf</button>
                 <ng-container *ngIf="this.rolActual == 'Paciente' || this.rolActual == 'admin'">
-                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad/Historia Clinica">
+                    <input type="text" appLimpiarFiltro (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad/Historia Clinica" (click)="limpiarFiltro()">
                 </ng-container>
                 <ng-container *ngIf="this.rolActual == 'Especialista'">
-                    <input type="text" (click)="limpiarFiltro()" (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialidad/Paciente/Historia Clinica">
+                    <input type="text" appLimpiarFiltro (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialidad/Paciente/Historia Clinica" (click)="limpiarFiltro()">
                 </ng-container>
             </div>
         </div>

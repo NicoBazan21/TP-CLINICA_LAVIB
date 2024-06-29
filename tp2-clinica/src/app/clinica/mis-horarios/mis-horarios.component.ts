@@ -6,11 +6,24 @@ import { UserService } from 'src/app/services/user.service';
 import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-mis-horarios',
   templateUrl: './mis-horarios.component.html',
-  styleUrls: ['./mis-horarios.component.css']
+  styleUrls: ['./mis-horarios.component.css'],
+  animations: [
+    trigger('slideFromTop', [
+      transition(':enter', [
+        style({ transform: 'translateY(-100%)', opacity: 0 }),
+        animate('1500ms ease-out', keyframes([
+          style({ transform: 'translateY(0)', opacity: 1, offset: 0.8 }),
+          style({ transform: 'translateY(40px)', offset: 0.9 }),
+          style({ transform: 'translateY(0)', offset: 1 })
+        ]))
+      ])
+    ])
+  ]
 })
 export class MisHorariosComponent implements OnInit, AfterViewInit{
   img: any;
@@ -54,8 +67,8 @@ export class MisHorariosComponent implements OnInit, AfterViewInit{
   
   habilitarDia($event:any)
   {
-    const elemento = $event.target;
-    $(elemento).toggleClass("gris");
+    // const elemento = $event.target;
+    // $(elemento).toggleClass("gris");
   }
 
   horarios: any[] = [];
