@@ -19,6 +19,7 @@ import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HoverDirective } from '../directivas/hover.directive';
 import { SeleccionarDirective } from '../directivas/seleccionar.directive';
+import { GraficosComponent } from './graficos/graficos.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { SeleccionarDirective } from '../directivas/seleccionar.directive';
     SidenavComponent,
     MisHorariosComponent,
     HoverDirective,
-    SeleccionarDirective
+    SeleccionarDirective,
+    GraficosComponent
   ],
   imports: [
     CommonModule,

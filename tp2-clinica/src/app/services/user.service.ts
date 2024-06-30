@@ -7,6 +7,7 @@ import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fir
 import { Especialista } from '../models/especialista';
 import { Admin } from '../models/admin';
 import { Turno } from '../models/turnos';
+import { Log } from '../models/log';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class UserService {
 
   coleccionUsuarios: CollectionReference<DocumentData> = collection(this.firestore, 'usuarios');
   coleccionEspecialidades: CollectionReference<DocumentData> = collection(this.firestore, 'especialidades');
+  coleccionLog: CollectionReference<DocumentData> = collection(this.firestore, 'log');
 
   //Colecciones
   guardarPaciente(paciente: Paciente)
@@ -92,6 +94,19 @@ export class UserService {
       });
   }
 
+  registrarLog(email: string)
+  {
+    const documento = doc(this.coleccionLog);
+    const id = documento.id;
+
+    return setDoc(documento,{
+      id: id,
+      email: email,
+      fecha: new Date().toLocaleDateString(),
+      hora: new Date().toLocaleTimeString()
+    })
+  }
+
   traerEspecialidades()
   {
     return collectionData(this.coleccionEspecialidades);
@@ -129,6 +144,17 @@ export class UserService {
     const querySnaphot = await getDocs(especialista);
 
     return querySnaphot.docs.map(doc=> doc.data());
+  }
+
+  async traerEspecialidadesValor()
+  {
+    const querySnaphot = await getDocs(this.coleccionEspecialidades);
+    return querySnaphot.docs.map(doc=>doc.data());
+  }
+
+  traerLogs()
+  {
+    return collectionData(this.coleccionLog)  as Observable<Log[]>;
   }
 
   traerEspecialistas()
@@ -206,8 +232,7 @@ export class UserService {
         })
       })
     }
-    
-
+   
   //Auths
   register(email: string, pass:string)
   {

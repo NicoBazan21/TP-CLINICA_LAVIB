@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CollectionReference, DocumentData, Firestore, collection, collectionData, doc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, Firestore, collection, collectionData, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { Turno } from '../models/turnos';
 import { Observable } from 'rxjs';
 
@@ -91,6 +91,12 @@ export class TurnosService {
           
     const querySnaphot = await getDocs(turnos);
 
+    return querySnaphot.docs.map(doc=> doc.data());
+  }
+
+  async traerTurnosValor()
+  {
+    const querySnaphot = await getDocs(this.coleccionTurnos);
     return querySnaphot.docs.map(doc=> doc.data());
   }
 }

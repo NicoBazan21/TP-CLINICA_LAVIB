@@ -71,12 +71,14 @@ export class LoginComponent
               case 'Paciente':
                 this.userService.sesionFirestore = new Paciente(user['id'], user['nombre'], user['apellido'], user['mail'], user['obraSocial'], user['edad'], user['dni'], user['clave'], user['rol'], '','');
                 this.router.navigateByUrl('clinica');
+                this.userService.registrarLog(user['mail']);
                 break;
               case 'Especialista':
               if(user.habilitado)
               {
                 this.userService.sesionFirestore = new Especialista(user['id'], user['nombre'], user['apellido'], user['mail'],user['especialidades'], user['edad'], user['dni'], user['clave'], user['habilitado'], ' ', user['rol'],user['inicio'],user['fin'],user['diasLaborables']);
                 this.router.navigateByUrl('clinica');
+                this.userService.registrarLog(user['mail']);
               }
               else
               {
@@ -94,6 +96,7 @@ export class LoginComponent
               case 'admin':
                 this.userService.sesionFirestore = new Admin(user['id'], user['nombre'], user['apellido'], user['mail'], user['edad'], user['dni'], user['clave'], ' ', user['rol']);
                 this.router.navigateByUrl('clinica');
+                this.userService.registrarLog(user['mail']);
               break;
             }
           });

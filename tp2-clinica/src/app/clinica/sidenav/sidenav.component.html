@@ -42,6 +42,11 @@
           <button mat-button (click)="irHistoriaClinica()"><mat-icon>article</mat-icon>Pacientes</button>
         </mat-list-item>
       </ng-container>
+      <ng-container *ngIf="this.user?.rol == 'admin'">
+        <mat-list-item>
+          <button mat-button routerLink="graficos"><mat-icon>article</mat-icon>Graficos</button>
+        </mat-list-item>
+      </ng-container>
     </mat-list>
   </mat-drawer>
   <mat-drawer-content>

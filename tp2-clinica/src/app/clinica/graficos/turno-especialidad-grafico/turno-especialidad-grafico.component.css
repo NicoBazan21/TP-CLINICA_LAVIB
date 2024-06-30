@@ -1,0 +1,14 @@
+/* En tu archivo CSS o en estilos del componente */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* Hace que el contenedor ocupe toda la altura de la pantalla */
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

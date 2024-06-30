@@ -22,6 +22,9 @@ const routes: Routes = [
       },
       { path: 'misTurnos',
         loadChildren: () => import('./mis-turnos/mis-turnos.module').then(m => m.MisTurnosModule)
+      },
+      { path: 'graficos',
+        loadChildren: () => import('./graficos/graficos-routing.module').then(m => m.GraficosRoutingModule)
       }
     ]
   },
