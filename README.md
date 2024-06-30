@@ -46,9 +46,22 @@ Bienvenidos TP CLINICA.
    a.Habilitacion de especialistas:
        ![image](https://github.com/NicoBazan21/TP-CLINICA_LAVIB/assets/86837081/492f0b71-de81-4737-b480-4c107549d334)
 
+7. Pacientes (especialista): El especialista podrá ver los 3 últimos turnos según la especialidad múltiple que elija si así lo desea.
+   ![image](https://github.com/NicoBazan21/TP-CLINICA_LAVIB/assets/86837081/6d0354fa-750c-4dbe-a073-07bf48099e24)
 
+      a. Detalle de la historia clinica:
+   ![image](https://github.com/NicoBazan21/TP-CLINICA_LAVIB/assets/86837081/86e5d58a-fe56-456f-87ea-49faea178e1b)
 
+8. Informes y gráficos (Admin): El administrador podrá ver distintas métricas sobre el desempeño de la clinica.
+   Y podrá exportar la información en excel o pdf.
+   ![image](https://github.com/NicoBazan21/TP-CLINICA_LAVIB/assets/86837081/380816a7-3b2e-469a-814c-3a1b6fec6db8)
    
+   
+
+
+
+
+
 
  
 
