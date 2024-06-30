@@ -12,6 +12,8 @@ export class Encuesta
   valorUno: string;
   claveDos: string;
   valorDos: string;
+  claveTres: string;
+  valorTres: string;
   nombrePaciente: string;
   nombreEspecialista: string;
   fecha: string;
@@ -27,6 +29,8 @@ export class Encuesta
   valorUno: string = '',
   claveDos: string = '',
   valorDos:string = '',
+  claveTres: string = '',
+  valorTres:string = '',
   idPaciente: string = '',
   idEspecialista: string = '',
   nombrePaciente: string = '',
@@ -48,5 +52,7 @@ export class Encuesta
     this.nombrePaciente = nombrePaciente;
     this.nombreEspecialista = nombreEspecialista;
     this.fecha = fecha;
+    this.claveTres = claveTres;
+    this.valorTres = valorTres;
   }
 }

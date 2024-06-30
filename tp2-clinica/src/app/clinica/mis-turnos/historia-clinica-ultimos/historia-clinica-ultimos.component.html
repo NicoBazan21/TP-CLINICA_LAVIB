@@ -1,0 +1,34 @@
+<ng-container *ngIf="this.turnoEncuesta != null && this.turnoEncuesta.length > 0 else elseBlock">
+    <ng-container *ngIf="!this.cargarDetalle else detalle">
+        <h1>Ultimos tres turnos de: {{this.turnoEncuesta[0].turno.nombreCompletoEspecialista}}</h1>
+        <select class="custom-select" style="position: relative;
+    left: 43%;" [(ngModel)]="selectedEspecialidad" (change)="filtrarPorEspecialidad()">
+            <option value="" selected>Filtrar por especialidad</option>
+            <ng-container *ngFor="let item of this.especialista?.especialidades">
+                <option [value]="item">{{item}}</option>
+            </ng-container>
+        </select>
+        <div class="card-container">
+        <ng-container *ngFor="let item of this.turnoEncuesta">        
+                <div class="card">
+                    <img [src]="item.url_foto" style="width: 100px; height: 60px; border-radius: 20px;" >  
+                    <p><strong>Paciente:</strong> {{item.turno.nombreCompletoPaciente}}</p>
+                    <p><strong>Especialidad:</strong> {{item.turno.especialidad}}</p>
+                    <p><strong>Fecha:</strong> {{item.turno.fecha}}</p>
+                    <p><strong>Hora:</strong> {{item.turno.hora}}</p>
+                    <p><strong>Estado:</strong> 
+                        <span class="badge badge-accepted">{{item.turno.estadoTurno}}</span>
+                    </p>
+                    <button class="btn gradient-custom-2" (click)="irHistoriaClinica(item)">Ver historia clinica</button>
+                </div>
+        </ng-container>
+        </div>  
+    </ng-container>
+    <ng-template #detalle>
+        <app-detalle-historia-clinica [turno]="this.turnoDetalle" [url_foto]="this.turnoDetalle?.url_foto" (onVolver)="atraparVolver($event)"></app-detalle-historia-clinica>
+    </ng-template>
+    
+</ng-container>
+<ng-template #elseBlock>
+    <h2>Cargando...</h2>
+</ng-template>

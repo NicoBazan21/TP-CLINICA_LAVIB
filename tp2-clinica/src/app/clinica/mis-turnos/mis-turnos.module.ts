@@ -18,6 +18,8 @@ import { AdminComponent } from './admin/admin.component';
 import { CalificarAtencionComponent } from './calificar-atencion/calificar-atencion.component';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 import { LimpiarFiltroDirective } from 'src/app/directivas/limpiar-filtro.directive';
+import { HistoriaClinicaUltimosComponent } from './historia-clinica-ultimos/historia-clinica-ultimos.component';
+import { DetalleHistoriaClinicaComponent } from './detalle-historia-clinica/detalle-historia-clinica.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { LimpiarFiltroDirective } from 'src/app/directivas/limpiar-filtro.direct
     CalificarAtencionComponent,
     HistoriaClinicaComponent,
     LimpiarFiltroDirective,
+    HistoriaClinicaUltimosComponent,
+    DetalleHistoriaClinicaComponent
   ],
   imports: [
     MisTurnosRoutingModule,

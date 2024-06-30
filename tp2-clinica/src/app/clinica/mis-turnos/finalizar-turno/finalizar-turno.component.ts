@@ -47,6 +47,8 @@ export class FinalizarTurnoComponent {
         valorUno: new FormControl('',[Validators.required,Validators.minLength(3)]),
         claveDos: new FormControl('',[Validators.required,Validators.minLength(3)]),
         valorDos: new FormControl('',[Validators.required,Validators.minLength(3)]),
+        claveTres: new FormControl('',[Validators.required,Validators.minLength(3)]),
+        valorTres: new FormControl('',[Validators.required,Validators.minLength(3)]),
       },Validators.required);
   }
 
@@ -54,7 +56,7 @@ export class FinalizarTurnoComponent {
   {
     if(this.form.valid)
     {   
-      let encuesta = new Encuesta('', this.data.id, this.altura?.value, this.peso?.value, this.temperatura?.value, this.presion?.value, this.claveUno?.value, this.valorUno?.value, this.claveDos?.value, this.valorDos?.value,
+      let encuesta = new Encuesta('', this.data.id, this.altura?.value, this.peso?.value, this.temperatura?.value, this.presion?.value, this.claveUno?.value, this.valorUno?.value, this.claveDos?.value, this.valorDos?.value,this.claveTres?.value,this.valorTres?.value,
         this.data.idPaciente, this.data.idEspecialista, this.data.nombreCompletoPaciente,this.data.nombreCompletoEspecialista)
         this.turnoService.finalizarTurno(this.data, this.resenia?.value);
         this.encuestaService.guardarEncuesta(encuesta).then(()=> {
@@ -100,5 +102,13 @@ export class FinalizarTurnoComponent {
   get valorDos()
   {
     return this.form.get('valorDos');
+  }
+  get claveTres()
+  {
+    return this.form.get('claveTres');
+  }
+  get valorTres()
+  {
+    return this.form.get('valorTres');
   }
 }

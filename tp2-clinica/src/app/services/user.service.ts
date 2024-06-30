@@ -168,6 +168,18 @@ export class UserService {
     })
   }
 
+  buscarUsuarioPorId(id: string): Promise<any>
+  {
+    const resultados = query(this.coleccionUsuarios, where("id","==",id));
+    return new Promise((resolve)=>
+    {
+      collectionData(resultados).subscribe((a)=>
+      {
+        resolve(a[0]);
+      });
+    })
+  }
+
   subirImagen(file: any, numero: number, mail: string)
   {
     const imgRef = ref(this.storage, `${mail}/${numero}`);
@@ -175,25 +187,26 @@ export class UserService {
     uploadBytes(imgRef, file);
   }
 
-  traerImagenes(mail: string) : Promise<string[]>
-  {
-    const imagesRef = ref(this.storage, mail);
-    let imagenes: any[] = [];
-
-    return new Promise((resolve)=>
+    traerImagenes(mail: string) : Promise<string[]>
     {
-      listAll(imagesRef)
-      .then(async (response)=>
+      const imagesRef = ref(this.storage, mail);
+      let imagenes: any[] = [];
+
+      return new Promise((resolve)=>
       {
-        for(let item of response.items)
+        listAll(imagesRef)
+        .then(async (response)=>
         {
-          const url = await getDownloadURL(item);
-          imagenes.push(url);
-        }
-        resolve(imagenes);
+          for(let item of response.items)
+          {
+            const url = await getDownloadURL(item);
+            imagenes.push(url);
+          }
+          resolve(imagenes);
+        })
       })
-    })
-  }
+    }
+    
 
   //Auths
   register(email: string, pass:string)

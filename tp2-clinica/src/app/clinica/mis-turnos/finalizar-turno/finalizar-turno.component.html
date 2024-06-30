@@ -72,6 +72,22 @@
                     </div>
                 </mat-form-field>
             </div>
+            <div class="row d-flex justify-content-between col-12 mb-3">
+                <mat-form-field class="col-3">
+                    <mat-label>Campo 3 adicional:</mat-label>
+                    <input type="text" matInput formControlName="claveTres" placeholder="Ingrese datos:">
+                    <div *ngIf="claveTres?.invalid && (claveTres?.dirty || claveTres?.touched)">
+                        <small class="text-danger">Mínimo 3 caracteres.</small>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Valor 3 adicional:</mat-label>
+                    <input type="text" matInput formControlName="valorTres" placeholder="Ingrese datos:">
+                    <div *ngIf="valorTres?.invalid && (valorTres?.dirty || valorTres?.touched)">
+                        <small class="text-danger">Mínimo 3 caracteres.</small>
+                    </div>
+                </mat-form-field>
+            </div>
         </div>      
     </form>      
 </mat-dialog-content>

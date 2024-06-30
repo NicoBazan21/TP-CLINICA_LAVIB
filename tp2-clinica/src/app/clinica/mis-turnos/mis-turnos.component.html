@@ -1,39 +1,48 @@
+<!-- PARA DESHACER CAMBIOS BORRAR LA SECCION ESPECIALISTA Y BORRAR EL FILTRO DE TURNOS
+ EN EL .TS  -->
 <ng-container *ngIf="this.renderizar != false">
-    <div class="container col-10" id="descargar">
-        <div class="col-md d-flex justify-content-end">
-            <div class="col-md-8">
-                <ng-container *ngIf="this.historiaClinica else elseBlock">
-                    <h2>Historia clinica</h2>
-                </ng-container>
-                <ng-template #elseBlock>
-                    <h2>Mis turnos</h2>
-                </ng-template>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Filtros:</span>
+    <!-- SECCUION ESPECIALISTA -->
+    <ng-container *ngIf="this.historiaClinica && this.rolActual == 'Especialista' else otro">
+        <app-historia-clinica-ultimos [misTurnos]="this.misTurnos"></app-historia-clinica-ultimos>
+    </ng-container>
+    <!-- SECCUION RESTO USUARIOS -->
+    <ng-template #otro>
+        <div class="container col-10" id="descargar">
+            <div class="col-md d-flex justify-content-end">
+                <div class="col-md-8">
+                    <ng-container *ngIf="this.historiaClinica else elseBlock">
+                        <h2>Historia clinica</h2>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <h2>Mis turnos</h2>
+                    </ng-template>
                 </div>
-                <button class="btn btn-danger" *ngIf="this.rolActual == 'Paciente'" (click)="exportarPdf()">Exportar a pdf</button>
-                <ng-container *ngIf="this.rolActual == 'Paciente' || this.rolActual == 'admin'">
-                    <input type="text" appLimpiarFiltro (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad/Historia Clinica" (click)="limpiarFiltro()">
-                </ng-container>
-                <ng-container *ngIf="this.rolActual == 'Especialista'">
-                    <input type="text" appLimpiarFiltro (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialidad/Paciente/Historia Clinica" (click)="limpiarFiltro()">
-                </ng-container>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Filtros:</span>
+                    </div>
+                    <button class="btn btn-danger" *ngIf="this.rolActual == 'Paciente'" (click)="exportarPdf()">Exportar a pdf</button>
+                    <ng-container *ngIf="this.rolActual == 'Paciente' || this.rolActual == 'admin'">
+                        <input type="text" appLimpiarFiltro (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialista/Especialidad/Historia Clinica" (click)="limpiarFiltro()">
+                    </ng-container>
+                    <ng-container *ngIf="this.rolActual == 'Especialista'">
+                        <input type="text" appLimpiarFiltro (keyup)="filtrar()" [(ngModel)]="this.filtro" class="form-control" placeholder="Especialidad/Paciente/Historia Clinica" (click)="limpiarFiltro()">
+                    </ng-container>
+                </div>
             </div>
+            
+            <ng-container *ngIf="this.rolActual == 'Paciente' && !this.historiaClinica">
+                <app-paciente [misTurnos]="this.misTurnos"></app-paciente>
+            </ng-container>
+            <ng-container *ngIf="this.rolActual == 'Especialista' && !this.historiaClinica">
+                <app-especialista [misTurnos]="this.misTurnos"></app-especialista>
+            </ng-container>
+            <ng-container *ngIf="this.rolActual == 'admin' && !this.historiaClinica">
+                <app-admin [misTurnos]="this.misTurnos"></app-admin>
+            </ng-container>
+            <ng-container *ngIf="this.historiaClinica">
+                <app-historia-clinica [misTurnos]="this.misTurnos"></app-historia-clinica>
+            </ng-container>
         </div>
-        
-        <ng-container *ngIf="this.rolActual == 'Paciente' && !this.historiaClinica">
-            <app-paciente [misTurnos]="this.misTurnos"></app-paciente>
-        </ng-container>
-        <ng-container *ngIf="this.rolActual == 'Especialista' && !this.historiaClinica">
-            <app-especialista [misTurnos]="this.misTurnos"></app-especialista>
-        </ng-container>
-        <ng-container *ngIf="this.rolActual == 'admin' && !this.historiaClinica">
-            <app-admin [misTurnos]="this.misTurnos"></app-admin>
-        </ng-container>
-        <ng-container *ngIf="this.historiaClinica">
-            <app-historia-clinica [misTurnos]="this.misTurnos"></app-historia-clinica>
-        </ng-container>
-    </div>
+    </ng-template>
 </ng-container>

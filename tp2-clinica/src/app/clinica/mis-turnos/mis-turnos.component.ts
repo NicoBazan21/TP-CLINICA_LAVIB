@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -24,6 +25,7 @@ export class MisTurnosComponent {
   renderizar = false;
   filtro: string = '';
 
+  //PIPES DE FORMATEO DE FECHA
   ngOnInit() {
     this.route.params.subscribe(params =>
     {
@@ -31,26 +33,56 @@ export class MisTurnosComponent {
       console.log(this.historiaClinica);
     })
     if(this.userService.sesionFirestore.rol == 'Paciente')
-      this.turnosService.traerTurnosPorPaciente(this.userService.sesionFirestore.id).subscribe((a)=>
+      this.turnosService.traerTurnosPorPaciente(this.userService.sesionFirestore.id)
+      .pipe(map(turnos => turnos.map(turno => {
+        return {
+          ...turno,
+          fecha: this.parseFecha(turno.fecha)
+        };
+      }))
+    ).subscribe((a)=>
       {
         this.misTurnos = a as Turno[];
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
       });
     else if(this.userService.sesionFirestore.rol == 'Especialista')
-    this.turnosService.traerTurnosPorEspecialista(this.userService.sesionFirestore.id).subscribe((a)=>
+    this.turnosService.traerTurnosPorEspecialista(this.userService.sesionFirestore.id)
+    .pipe(map(turnos => turnos.map(turno => {
+        return {
+          ...turno,
+          fecha: this.parseFecha(turno.fecha)
+        };
+      }))
+    ).subscribe((turnos)=>
       {
-        this.misTurnos = a as Turno[];
+        this.misTurnos = turnos as Turno[];
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
       });
     else
-    this.turnosService.traerTurnos().subscribe((a)=>
+    this.turnosService.traerTurnos()
+    .pipe(map(turnos => turnos.map(turno => {
+      return {
+        ...turno,
+        fecha: this.parseFecha(turno['fecha'])
+      };
+    }))).subscribe((a)=>
       {
         this.misTurnos = a as Turno[];
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
       });    
+  }
+
+  parseFecha(fechaStr: string): string {
+    const [dia, mes] = fechaStr.split('/').map(Number);
+    return new Date(2024, mes - 1, dia).toLocaleDateString();
+  }
+
+  parseFechaCompleta(fechaStr: string): Date {
+    const [dia, mes, anio] = fechaStr.split('/').map(Number);
+    return new Date(anio, mes - 1, dia);
   }
 
   fileName = "Ejemplo.xlsx";
@@ -66,16 +98,29 @@ export class MisTurnosComponent {
     XLSX.writeFile(wb,this.fileName);
   }
 
-  exportarPdf()
-  {
-    var data = document.getElementById('descargar')!;
+  exportarPdf() {
+    const data = document.getElementById('descargar')!;
+    
+    const iconUrl = '../../../assets/img/hospital.png';
+  
     html2canvas(data).then(canvas => {
       const contentDataUrl = canvas.toDataURL('image/png');
-
-      let pdf = new jsPDF('p','mm','a4');
-      var position = 0;
-
-      pdf.addImage(contentDataUrl, 'PNG',0,position, 210, 100);
+      
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      pdf.addImage(iconUrl, 'PNG', 10, 10, 30, 30);
+      
+      pdf.setFontSize(18);
+      pdf.setTextColor(40, 40, 40);
+      pdf.text(`Historia clinica del paciente: ${this.userService.sesionFirestore.nombre} ${this.userService.sesionFirestore.apellido}.`, 50, 20); // Posición (50, 20)
+      let date = new Date();
+      pdf.setFontSize(14);
+      pdf.setTextColor(60, 60, 60);
+      pdf.text('Fecha al: ' + date.toLocaleDateString(), 50, 30);
+      
+      const positionY = 50;
+      pdf.addImage(contentDataUrl, 'PNG', 0, positionY, 210, 100);
+      
       pdf.save('pdfPrueba.pdf');
     });
   }

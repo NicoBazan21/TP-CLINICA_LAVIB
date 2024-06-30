@@ -21,7 +21,7 @@
             <ng-container [ngSwitch]="item.estadoTurno">
                 <ng-container *ngSwitchCase="'Pendiente'">
                     <td>
-                        <button class="btn btn-outline-primary">Pendiente</button>
+                        <span style="color:#007bff;">Pendiente</span>
                     </td>
                     <td>
                         <button class="btn btn-outline-danger" (click)="cancelarTurno(item.id)">Cancelar turno</button>
@@ -30,7 +30,7 @@
                 
                 <ng-container *ngSwitchCase="'Aceptado'">
                     <td>
-                        <button class="btn btn-outline-warning">{{item.estadoTurno}}</button>
+                        <span style="color:#ffc107;">Aceptado</span>
                     </td>
                     <td>
                         <button class="btn btn-outline-warning">N/A</button>                
@@ -39,7 +39,7 @@
 
                 <ng-container *ngSwitchCase="'Finalizado'">
                     <td>
-                        <button class="btn btn-outline-success">{{item.estadoTurno}}</button>
+                        <span style="color:#198754;">Finalizado</span>
                     </td>
                     <td>
                         <button class="btn btn-outline-success">N/A</button>                
@@ -48,7 +48,7 @@
 
                 <ng-container *ngSwitchDefault>
                     <td>
-                        <button class="btn btn-outline-secondary">{{item.estadoTurno}}</button>
+                        <span style="color:#6c757d;">Cancelado</span>
                     </td>
                     <td>
                         <button class="btn btn-outline-secondary">N/A</button>                

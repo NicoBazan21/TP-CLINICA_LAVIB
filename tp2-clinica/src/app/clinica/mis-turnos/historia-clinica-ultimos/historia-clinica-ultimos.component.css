@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.card {
+    background: #ffffffab;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    margin: 10px;
+    box-sizing: border-box;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.card p {
+    margin: 10px 0;
+    color: #555;
+}
+.card .badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #ffffff;
+}
+.badge-accepted {
+    background-color: #4caf50;
+}
+.badge-finalized {
+    background-color: #f44336;
+}
+
+h1
+{
+    display: flex;
+    justify-content: center;
+}
+
+.gradient-custom-2 {
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(23, 155, 173, 0.479), rgba(159, 199, 218, 0.425));
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+  }
+  
+  .gradient-custom-2:hover {
+    background-color: yellow; /* Cambia el fondo a amarillo al hacer hover */
+  }
+  
+
+  .custom-select {
+    appearance: none; /* Oculta el estilo nativo del navegador */
+    background-color: #f2f2f2; /* Color de fondo */
+    padding: 8px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Borde redondeado */
+    width: 200px; /* Ancho del select */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el select */
+  }
+  
+  .custom-select:hover {
+    background-color: #e0e0e0; /* Color de fondo al pasar el cursor */
+  }
+  
+  .custom-select:focus {
+    outline: none; /* Elimina el contorno al enfocar */
+    border-color: #007bff; /* Color de borde al enfocar */
+  }
+  
+  .custom-select option {
+    padding: 8px; /* Espaciado interno de las opciones */
+  }
+  

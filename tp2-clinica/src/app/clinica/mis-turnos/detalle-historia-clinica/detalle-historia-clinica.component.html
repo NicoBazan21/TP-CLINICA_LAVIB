@@ -1,0 +1,47 @@
+<div class="detalle-turno" style="    width: 85%;
+left: 8%;
+position: relative;">
+  <div class="card shadow" style="background-color: transparent;">
+      <div class="card-body">
+          <h5 class="card-title mb-4">Detalle del Turno</h5>
+          <div class="row">
+              <!-- Primera columna con 2 campos -->
+              <div class="col-md-6 mb-4">
+                  <div class="card border-0" style="background-color: #ffffff6b;">
+                      <div class="card-header bg-primary text-white">
+                          <strong>Datos del Turno</strong>
+                      </div>
+                      <div class="card-body">
+                          <p><strong>Especialista:</strong> {{ this.turno?.turno?.nombreCompletoEspecialista }}</p>
+                          <p><strong>Paciente:</strong> {{ this.turno?.turno?.nombreCompletoPaciente }}</p>
+                          <p><strong>Especialidad:</strong> {{ this.turno?.turno?.especialidad }}</p>
+                          <p><strong>Fecha:</strong> {{ this.turno?.turno?.fecha }}</p>
+                          <p><strong>Hora:</strong> {{ this.turno?.turno?.hora }}</p>
+                          <p><strong>Estado:</strong> {{ this.turno?.turno?.estadoTurno }}</p>
+                          <p><strong>Reseña:</strong> {{ this.turno?.turno?.resenia }}</p>
+                      </div>
+                      <button class="btn gradient-custom-2" (click)="volver()">Volver</button>
+                  </div>
+              </div>
+              <!-- Segunda columna con 3 campos -->
+              <div class="col-md-6">
+                  <div class="card border-0"style="background-color: #ffffff6b;">
+                      <div class="card-header bg-info text-white">
+                          <strong>Historia clínica del turno</strong>
+                      </div>
+                      <div class="card-body">
+                          <img [src]="url_foto" class="img-fluid rounded mb-3" alt="Foto del paciente">
+                          <p><strong>Temperatura:</strong> {{ this.turno?.encuesta?.temperatura }}</p>
+                          <p><strong>Presión:</strong> {{ this.turno?.encuesta?.presion }}</p>
+                          <p><strong>Altura:</strong> {{ this.turno?.encuesta?.altura }}</p>
+                          <p><strong>Peso:</strong> {{ this.turno?.encuesta?.peso }}</p>
+                          <p><strong> {{ this.turno?.encuesta?.claveUno }}</strong> {{ this.turno?.encuesta?.valorUno }}</p>
+                          <p><strong> {{ this.turno?.encuesta?.claveDos }}</strong> {{ this.turno?.encuesta?.valorDos }}</p>
+                          <p><strong>{{ this.turno?.encuesta?.claveTres }}</strong> {{ this.turno?.encuesta?.valorTres }}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

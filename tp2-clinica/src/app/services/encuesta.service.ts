@@ -28,6 +28,8 @@ export class EncuestaService {
       valorUno: encuesta.valorUno,
       claveDos: encuesta.claveDos,
       valorDos: encuesta.valorDos,
+      claveTres: encuesta.claveTres,
+      valorTres: encuesta.valorTres,
       idPaciente: encuesta.idPaciente,
       idEspecialista: encuesta.idEspecialista,
       nombrePaciente: encuesta.nombrePaciente,

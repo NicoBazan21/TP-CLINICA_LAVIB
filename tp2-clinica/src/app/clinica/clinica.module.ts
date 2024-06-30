@@ -37,6 +37,7 @@ import { SeleccionarDirective } from '../directivas/seleccionar.directive';
     MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule,
     MatToolbarModule, MatIconModule, MatListModule,
     ReactiveFormsModule,FormsModule, CarouselModule
-  ]
+  ],
+  exports:[HoverDirective]
 })
 export class ClinicaModule { }

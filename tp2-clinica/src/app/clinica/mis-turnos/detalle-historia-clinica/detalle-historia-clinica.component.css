@@ -1,0 +1,16 @@
+img
+{
+  width: 300px;
+    position: absolute;
+    height: 250px;
+    left: 40%;
+    border-radius: 52px !important;
+}.gradient-custom-2 {
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(23, 155, 173, 0.479), rgba(159, 199, 218, 0.425));
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.gradient-custom-2:hover {
+  background-color: yellow; /* Cambia el fondo a amarillo al hacer hover */
+}
