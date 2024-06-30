@@ -6,11 +6,11 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const userService = inject(UserService);
   const router = inject(Router);
 
-  return true;
-  // if(userService.sesionFirestore.rol == 'admin')
-  // {
-  //   return true;
-  // }
-  // router.navigateByUrl('clinica');
-  // return false;
+  // return true;
+  if(userService.sesionFirestore.rol == 'admin')
+  {
+    return true;
+  }
+  router.navigateByUrl('clinica');
+  return false;
 };
