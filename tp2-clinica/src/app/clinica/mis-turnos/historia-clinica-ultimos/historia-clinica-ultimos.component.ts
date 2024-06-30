@@ -27,7 +27,7 @@ export class HistoriaClinicaUltimosComponent implements OnInit{
       {
         this.especialista = this.userService.sesionFirestore;
       }
-      
+      this.misTurnos = this.misTurnos.filter(turno=>turno.estadoTurno == 'Finalizado');
       this.misTurnos!.sort((a, b) => {
         const fechaA = this.parseFechaCompleta(a.fecha);
         const fechaB = this.parseFechaCompleta(b.fecha);

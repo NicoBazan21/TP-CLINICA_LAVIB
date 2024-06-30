@@ -125,10 +125,25 @@ export class GraficosComponent implements OnInit {
         hoverOffset: 4
       }]
     };
+let delayed;
 
     const chart: Chart = new Chart("turnosFinaliz", {
       type:'bar',
       data: datos,
+      options:{
+        animation: {
+          onComplete: () => {
+            delayed = true;
+          },
+          delay: (context) => {
+            let delay = 0;
+            if (context.type === 'data' && context.mode === 'default' && !delayed) {
+              delay = context.dataIndex * 300 + context.datasetIndex * 100;
+            }
+            return delay;
+          },
+        },
+      }
     })
   }
 
@@ -153,7 +168,7 @@ export class GraficosComponent implements OnInit {
     const data = labels.map(esp => 
       turnosFiltrados.filter(turno => turno.nombreCompletoEspecialista == esp).length
     )
-
+    
     this.turnosSolicitados = this.crearTupla(labels, data);
     const datos = {
       labels: labels,
@@ -172,7 +187,7 @@ export class GraficosComponent implements OnInit {
     };
 
     const chart: Chart = new Chart("turnosSolic", {
-      type:'bar',
+      type:'polarArea' as ChartType,
       data: datos,
     })
   }
@@ -244,7 +259,7 @@ export class GraficosComponent implements OnInit {
       }]
     };
     const chart: Chart = new Chart("cantTurnos", {
-      type: 'polarArea' as ChartType,
+      type: 'pie' as ChartType,
       data: datos,
       options: {
         responsive: true,
