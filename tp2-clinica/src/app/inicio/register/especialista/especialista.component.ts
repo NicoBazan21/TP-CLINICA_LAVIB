@@ -19,6 +19,10 @@ export class EspecialistaComponent
   primerImagen!: any;
   especialidades!: any[];
 
+  especialidadElegida?: string[] = [];
+
+  checkbox: boolean = false;
+
   constructor(private toastr: ToastrService,
     private userService: UserService,
     private router: Router
@@ -34,7 +38,6 @@ export class EspecialistaComponent
       apellido: new FormControl("", [Validators.pattern('^[a-zA-Z ]+$'), Validators.minLength(2), Validators.required]),
       edad: new FormControl('', [Validators.min(18), Validators.max(100), Validators.required]),
       dni: new FormControl('', [Validators.min(10000000),Validators.max(99999999), Validators.required]),
-      especialidad: new FormControl("", [Validators.required]),
       agregarEsp: new FormControl("",[Validators.pattern('^[a-zA-Z ]+$'), Validators.minLength(4)]),
       clave: new FormControl("", [Validators.minLength(6), Validators.required]),
       repiteClave: new FormControl("", ),
@@ -50,13 +53,13 @@ export class EspecialistaComponent
 
   guardar()
   {  
-    if(this.form.valid)
+    if(this.form.valid && this.especialidadElegida.length > 0)
     {
       const especialista = new Especialista('',
       this.nombre!.value,
       this.apellido!.value,
       this.email!.value,
-      [this.especialidad!.value],
+      this.especialidadElegida,
       this.edad!.value,
       this.dni!.value,
       this.clave!.value,
@@ -96,6 +99,7 @@ export class EspecialistaComponent
     }
     else
     {
+      console.log(this.form);
       this.toastr.warning('Completa correctamente los campos', `Atencion!.`,
       {
         tapToDismiss: true,
@@ -105,6 +109,14 @@ export class EspecialistaComponent
         positionClass: 'toast-top-right'
       });
     }
+  }
+
+  habilitar(especialidad: string)
+  {
+    if(!this.especialidadElegida.includes(especialidad))
+      this.especialidadElegida.push(especialidad);
+    else
+      this.especialidadElegida = this.especialidadElegida.filter(a=>a != especialidad);
   }
 
   agregarEspecialidad()

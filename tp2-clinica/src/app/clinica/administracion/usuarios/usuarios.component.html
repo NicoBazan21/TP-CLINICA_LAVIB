@@ -9,7 +9,7 @@
     </div>
 
     <div class="row col-12">
-      <app-tabla [listaEspecialistas]="this.listaEspecialistas" (onEnviarEsp)="atraparEsp($event)"></app-tabla>
+      <app-tabla [listaEspecialistas]="this.lista" (onEnviarEsp)="atraparEsp($event)"></app-tabla>
     </div>
     <ng-container *ngIf="this.bandera == false else elseBlock">
     </ng-container>

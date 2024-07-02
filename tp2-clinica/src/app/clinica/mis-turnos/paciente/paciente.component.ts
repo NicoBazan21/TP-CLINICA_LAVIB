@@ -79,7 +79,33 @@ export class PacienteComponent{
       {
         data: {
           misTurnos: this.misTurnos,
-          id: id
+          id: id,
+          campo:'encuesta'
+        }
+      }
+    )
+  }
+
+  encuesta(id:string)
+  {
+    this.dialog.open(CalificarAtencionComponent,
+      {
+        data: {
+          misTurnos: this.misTurnos,
+          id: id,
+          campo: 'encuesta'
+        }
+      }
+    )
+  }
+
+  verEncuesta(id:string)
+  {
+    this.dialog.open(VerComentarioComponent,
+      {
+        data: {
+          data: this.misTurnos.find(a=>a.id == id)?.encuesta,
+          campo: 'Encuesta'
         }
       }
     )

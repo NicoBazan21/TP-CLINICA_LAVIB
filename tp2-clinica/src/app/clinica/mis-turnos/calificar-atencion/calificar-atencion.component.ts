@@ -30,11 +30,19 @@ export class CalificarAtencionComponent {
   {
     if(this.form.valid)
     {
-      this.turnosService.calificarAtencion(this.data.misTurnos.find(a=>a.id == this.data.id)!, this.comentario?.value)
+      if(this.data.campo != 'encuesta')
+        this.turnosService.calificarAtencion(this.data.misTurnos.find(a=>a.id == this.data.id)!, this.comentario?.value)
+        .then((a)=>
+        {
+          this.dialogRef.close('');
+          this.toastr.success('Su comentario ha sido cargado con exito', `Listo!`, { tapToDismiss: true, progressBar: true, progressAnimation:'increasing', payload:true, positionClass: 'toast-top-right' });
+        });
+      else
+      this.turnosService.calificarEncuesta(this.data.misTurnos.find(a=>a.id == this.data.id)!, this.comentario?.value)
       .then((a)=>
       {
         this.dialogRef.close('');
-        this.toastr.success('Su comentario ha sido cargado con exito', `Listo!`, { tapToDismiss: true, progressBar: true, progressAnimation:'increasing', payload:true, positionClass: 'toast-top-right' });
+        this.toastr.success('Su encuesta ha sido cargado con exito', `Listo!`, { tapToDismiss: true, progressBar: true, progressAnimation:'increasing', payload:true, positionClass: 'toast-top-right' });
       });
     }
   }

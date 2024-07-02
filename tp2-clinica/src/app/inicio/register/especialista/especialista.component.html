@@ -43,7 +43,7 @@
                     <div class="col-md pb-2">
                       <div class="form-outline form-white">
                         <input type="text" id="form3Examplev4d" formControlName="agregarEsp" class="form-control" />
-                      <label class="form-label" for="form3Examplev4">Agregar especialidad</label>
+                      <label class="form-label" for="form3Examplev4">Agregar nueva especialidad a la clinica</label>
                       </div>
                     </div>
                     <div class="col-md-6 pb-2">
@@ -53,13 +53,28 @@
                       </div>
                     </div>
                   </div>
-
-                  <select class="form-select" formControlName="especialidad" aria-label="Default select example">
-                    <ng-container *ngFor="let item of this.especialidades">
-                      <option value={{item.especialidad}}>{{item.especialidad}}</option>
-                    </ng-container>
-                  </select>
-
+            
+                  <div class="row">
+                    <div class="col-md-6 pb-2">
+                      <div class="pb-2 d-flex flex-column">
+                        <ng-container *ngFor="let item of especialidades">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="{{'checkbox_' + item.especialidad}}" (click)="habilitar(item.especialidad)">
+                            <label class="form-check-label" for="{{'checkbox_' + item.especialidad}}">{{item.especialidad}}</label>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 pb-2">
+                      <label class="form-label me-2 col-6" for="e">Especialidades actuales:</label>
+                      <select class="form-select form-select-sm form-control col-6" id="e">
+                        <ng-container *ngFor="let item of especialidadElegida">
+                          <option [value]="item">{{item}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                  
                 </div>
               </div>
               <div class="col-lg-6 bg-indigo text-white" style="border-radius: 15px;">

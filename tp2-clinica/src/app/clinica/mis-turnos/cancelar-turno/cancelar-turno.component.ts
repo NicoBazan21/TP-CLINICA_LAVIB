@@ -51,4 +51,5 @@ export class CancelarTurnoComponent implements OnInit{
 export interface DialogData {
   misTurnos: Turno[];
   id: string;
+  campo:string;
 }

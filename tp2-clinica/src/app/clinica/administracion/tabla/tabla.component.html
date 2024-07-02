@@ -3,6 +3,7 @@
     <table class="table table-dark table-hover" style="opacity: 0.7;">
       <thead>
         <tr>
+          <th>Seleccion</th>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Dni</th>
@@ -14,14 +15,19 @@
       </thead>
       <tbody>
         <tr *ngFor="let prod of this.listaEspecialistas | ordenarAlfabetico:'nombre'">
-          <td>{{prod.nombre}}</td>
-          <td>{{prod.apellido | datoImpotante}}</td>
-          <td>{{prod.dni}}</td>
-          <td>{{prod.edad | formatEdad}}</td>
-          <td>{{prod.mail}}</td>
-          <td>{{prod.rol | datoImpotante}}</td>
-          <ng-container *ngIf="prod.rol == 'Especialista' else elseBlockk">
-            <td *ngIf="prod.habilitado == false else elseBlock">
+          <td>
+            <button class="image-button" (click)="exportarExcel(prod.user)">
+              <img [src]="prod.url_foto" class="button-image">
+            </button>            
+          </td>
+          <td>{{prod.user.nombre | datoImpotante}}</td>
+          <td>{{prod.user.apellido | datoImpotante}}</td>
+          <td>{{prod.user.dni}}</td>
+          <td>{{prod.user.edad | formatEdad}}</td>
+          <td>{{prod.user.mail}}</td>
+          <td>{{prod.user.rol | datoImpotante}}</td>
+          <ng-container *ngIf="prod.user.rol == 'Especialista' else elseBlockk">
+            <td *ngIf="prod.user.habilitado == false else elseBlock">
               <button class="btn btn-success" (click)="habilitar(prod)">Habilitar</button>
             </td>
             <ng-template #elseBlock>

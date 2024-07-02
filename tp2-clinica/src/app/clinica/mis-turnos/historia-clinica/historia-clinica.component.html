@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th>Fecha</th>
+                <th>Especialidad</th>
                 <th>Profesional</th>
                 <th>Paciente</th>
                 <th>Altura</th>
@@ -20,6 +21,7 @@
                     <tr [attr.data-filtro]="item.turno.nombreCompletoEspecialista +' '+ item.turno.especialidad + ' ' + 
                     item.encuesta.altura + ' ' + item.encuesta.peso + ' ' + item.encuesta.presion + ' ' + item.encuesta.temperatura + ' ' + item.encuesta.claveUno + ' ' + item.encuesta.valorUno + ' ' + item.encuesta.claveDos + ' ' + item.encuesta.valorDos ">
                         <td>{{item.turno.fecha}} {{item.turno.hora}} hs.</td>
+                        <td>{{item.turno.especialidad}}</td>
                         <td>{{item.turno.nombreCompletoEspecialista}}</td>
                         <td>{{item.turno.nombreCompletoPaciente}}</td>
                         <td>{{item.encuesta.altura}}cm.</td>

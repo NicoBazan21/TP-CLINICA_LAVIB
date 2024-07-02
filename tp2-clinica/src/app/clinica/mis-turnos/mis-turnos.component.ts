@@ -17,20 +17,20 @@ import { map } from 'rxjs';
 export class MisTurnosComponent {
 
   historiaClinica: string = '';
-  
+  selectedEspecialidad: string = '';
   constructor(private route: ActivatedRoute,private userService: UserService, private turnosService: TurnosService){}
   
   misTurnos: Turno[] = [];
   rolActual: string = '';
   renderizar = false;
   filtro: string = '';
+  listaEspecialidades: string[];
 
   //PIPES DE FORMATEO DE FECHA
   ngOnInit() {
     this.route.params.subscribe(params =>
     {
       this.historiaClinica = params['historiaClinica'];
-      console.log(this.historiaClinica);
     })
     if(this.userService.sesionFirestore.rol == 'Paciente')
       this.turnosService.traerTurnosPorPaciente(this.userService.sesionFirestore.id)
@@ -45,6 +45,7 @@ export class MisTurnosComponent {
         this.misTurnos = a as Turno[];
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
+        this.listaEspecialidades = [...new Set(this.misTurnos.map(turno => turno.especialidad))];
       });
     else if(this.userService.sesionFirestore.rol == 'Especialista')
     this.turnosService.traerTurnosPorEspecialista(this.userService.sesionFirestore.id)
@@ -59,6 +60,7 @@ export class MisTurnosComponent {
         this.misTurnos = turnos as Turno[];
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
+        this.listaEspecialidades = [...new Set(this.misTurnos.map(turno => turno.especialidad))];
       });
     else
     this.turnosService.traerTurnos()
@@ -72,6 +74,7 @@ export class MisTurnosComponent {
         this.misTurnos = a as Turno[];
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
+        this.listaEspecialidades = [...new Set(this.misTurnos.map(turno => turno.especialidad))];
       });    
   }
 
@@ -153,5 +156,19 @@ export class MisTurnosComponent {
       });
     else
       this.limpiarFiltro();
+  }
+
+  filtrarPorEspecialidad()
+  {
+    $('table tr').each((i, tr) => {
+        
+      let dataFiltro = $(tr).data('filtro');
+
+      if(dataFiltro)
+        if(((dataFiltro).toUpperCase().includes(this.selectedEspecialidad.toUpperCase()))) 
+          $(tr).removeClass("ocultarRow");
+        else
+          $(tr).addClass("ocultarRow");
+    });
   }
 }

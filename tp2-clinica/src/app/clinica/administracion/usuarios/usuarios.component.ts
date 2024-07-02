@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { Especialista } from 'src/app/models/especialista';
 import { UserService } from 'src/app/services/user.service';
 import * as XLSX from 'xlsx';
 
@@ -15,6 +14,7 @@ export class UsuariosComponent
 {
   bandera = false;
   listaEspecialistas: any[] = [];
+  lista: ContentData[] = [];
 
   constructor(private userServie: UserService, private router: Router){}
 
@@ -27,6 +27,11 @@ export class UsuariosComponent
     this.userServie.traerUsuarios().subscribe((a)=>
       {
         this.listaEspecialistas = a;
+        this.lista = [];
+        this.listaEspecialistas.forEach(async user => {
+          let img = await this.userServie.traerImagenes(user.mail);
+          this.lista.push({user: user, url_foto: img[0]});
+        })
       })
   }
 
@@ -86,4 +91,9 @@ export class UsuariosComponent
     });
   }
   
+}
+
+export interface ContentData{
+  user: any,
+  url_foto: string,
 }

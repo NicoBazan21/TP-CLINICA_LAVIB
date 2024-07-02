@@ -39,6 +39,12 @@ export class TurnosService {
 
     return this.modificarTurno(turno);
   }
+  calificarEncuesta(turno: Turno, comentario: string)
+  {
+    turno.encuesta = comentario;
+
+    return this.modificarTurno(turno);
+  }
 
   finalizarTurno(turno: Turno, resenia: string) : Promise<void>
   {

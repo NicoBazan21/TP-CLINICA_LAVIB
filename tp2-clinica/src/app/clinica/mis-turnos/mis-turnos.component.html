@@ -9,7 +9,7 @@
     <ng-template #otro>
         <div class="container col-10" id="descargar">
             <div class="col-md d-flex justify-content-end">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <ng-container *ngIf="this.historiaClinica else elseBlock">
                         <h2>Historia clinica</h2>
                     </ng-container>
@@ -18,6 +18,12 @@
                     </ng-template>
                 </div>
                 <div class="input-group mb-3">
+                    <select class="custom-select" [(ngModel)]="selectedEspecialidad" (change)="filtrarPorEspecialidad()">
+                        <option value="" selected>Filtrar por especialidad</option>
+                        <ng-container *ngFor="let item of this.listaEspecialidades">
+                            <option [value]="item">{{item}}</option>
+                        </ng-container>
+                    </select>
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Filtros:</span>
                     </div>

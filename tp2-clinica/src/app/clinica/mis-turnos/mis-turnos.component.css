@@ -2,3 +2,28 @@
 {
     display: none;
 }
+
+.custom-select {
+    appearance: none; /* Oculta el estilo nativo del navegador */
+    background-color: #f2f2f2; /* Color de fondo */
+    padding: 8px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Borde redondeado */
+    width: 200px; /* Ancho del select */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el select */
+  }
+  
+  .custom-select:hover {
+    background-color: #e0e0e0; /* Color de fondo al pasar el cursor */
+  }
+  
+  .custom-select:focus {
+    outline: none; /* Elimina el contorno al enfocar */
+    border-color: #007bff; /* Color de borde al enfocar */
+  }
+  
+  .custom-select option {
+    padding: 8px; /* Espaciado interno de las opciones */
+  }
+  

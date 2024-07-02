@@ -63,7 +63,12 @@
                                 <button class="btn btn-outline-warning" (click)="verResenia(item.turno.id)">Ver reseña</button>
                             </td>
                             <td class="d-flex">
-                                <button class="btn btn-outline-info me-2">Encuesta</button>
+                                <ng-container *ngIf="item.turno.encuesta == '' else elseEncuesta">
+                                    <button class="btn btn-outline-info me-2" (click)="encuesta(item.turno.id)">Encuesta</button>
+                                </ng-container>
+                                <ng-template #elseEncuesta>
+                                    <button class="btn btn-outline-info me-2" (click)="verEncuesta(item.turno.id)">Ver encuesta</button>
+                                </ng-template>
                                 
                                 <ng-container *ngIf="item.turno.comentarioAtencion == '' else elseBlock">
                                   <button class="btn btn-outline-info me-2" (click)="calificarAtencion(item.turno.id)">Calificar aten.</button>
