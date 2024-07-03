@@ -27,3 +27,36 @@
     padding: 8px; /* Espaciado interno de las opciones */
   }
   
+  
+/* Estilos generales para la pantalla de carga */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); /* Esto desenfoca el fondo */
+  z-index: 1000; /* Asegúrate de que esté en el frente */
+}
+
+/* Estilos para el GIF de carga */
+.loading-gif {
+  width: 50px;
+  height: 50px;
+}
+
+/* Estilos para el contenido de fondo */
+.background-content {
+  position: relative;
+  z-index: 1; /* Para que esté detrás de la pantalla de carga */
+  padding: 20px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}

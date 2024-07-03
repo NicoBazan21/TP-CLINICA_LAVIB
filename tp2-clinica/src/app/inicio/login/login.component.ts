@@ -17,6 +17,8 @@ export class LoginComponent
   form!: FormGroup;
   siteKey: string;
 
+  isLoading: boolean = false;
+
   constructor(private toastr: ToastrService,
     private userService: UserService,
     private router: Router
@@ -38,6 +40,7 @@ export class LoginComponent
   {
     if(this.form.valid)
     {
+      this.isLoading = true;
       this.toastr.info('', `Iniciando sesion...`,
         {
           tapToDismiss: true,
@@ -60,12 +63,14 @@ export class LoginComponent
             positionClass: 'toast-top-right'
           });
           this.userService.logout();
+          this.isLoading = false;
         }
         else
         {
           this.userService.buscarUsuario(this.email?.value)
           .then((user)=>
           {
+            this.isLoading = false;
             switch(user['rol'])
             {
               case 'Paciente':

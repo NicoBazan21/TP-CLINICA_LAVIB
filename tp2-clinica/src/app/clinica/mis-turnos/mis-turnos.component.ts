@@ -26,6 +26,7 @@ export class MisTurnosComponent {
   filtro: string = '';
   listaEspecialidades: string[];
 
+  isLoading = true;
   //PIPES DE FORMATEO DE FECHA
   ngOnInit() {
     this.route.params.subscribe(params =>
@@ -46,6 +47,9 @@ export class MisTurnosComponent {
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
         this.listaEspecialidades = [...new Set(this.misTurnos.map(turno => turno.especialidad))];
+                setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       });
     else if(this.userService.sesionFirestore.rol == 'Especialista')
     this.turnosService.traerTurnosPorEspecialista(this.userService.sesionFirestore.id)
@@ -61,6 +65,9 @@ export class MisTurnosComponent {
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
         this.listaEspecialidades = [...new Set(this.misTurnos.map(turno => turno.especialidad))];
+                setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       });
     else
     this.turnosService.traerTurnos()
@@ -75,6 +82,9 @@ export class MisTurnosComponent {
         this.renderizar = true;
         this.rolActual = this.userService.sesionFirestore.rol;
         this.listaEspecialidades = [...new Set(this.misTurnos.map(turno => turno.especialidad))];
+                setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       });    
   }
 
